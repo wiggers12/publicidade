@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espaço Tai Botelho - Sua Beleza Começa Aqui!</title>
+    <title>Promoção Incrível! - Espaço Tai Botelho</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -26,18 +26,18 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 15px; /* Reduzido um pouco */
+            padding: 15px;
             box-sizing: border-box;
-            line-height: 1.5; /* Ajustado */
+            line-height: 1.5;
         }
 
         .container {
             background-color: #FFFFFF;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra mais compacta */
-            padding: 25px; /* Reduzido um pouco */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 25px;
             text-align: center;
-            max-width: 450px; /* Levemente mais estreito */
+            max-width: 450px;
             width: 100%;
             box-sizing: border-box;
             border: 1px solid var(--cor-borda-card);
@@ -47,38 +47,36 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            margin-bottom: 20px; /* Reduzido */
+            margin-bottom: 25px; /* Aumentado um pouco para compensar texto removido */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         header h1 {
             color: var(--cor-primaria);
-            font-size: 2.2em; /* Título um pouco menor */
-            margin-bottom: 8px; /* Reduzido */
-            font-weight: 700;
-            line-height: 1.1;
+            font-size: 0; /* Torna o texto invisível */
+            height: 0; /* Remove o espaço ocupado */
+            overflow: hidden; /* Garante que não apareça nada */
+            margin: 0; /* Remove margens */
+            padding: 0; /* Remove paddings */
+            /* Se quiser um ícone invisível mas presente no HTML para SEO ou acessibilidade, pode deixar um span com ícone aqui. Ex: <span>✨</span> */
         }
-
-        .empresa-info {
-            font-size: 1em; /* Levemente menor */
-            color: #666;
-            margin-bottom: 20px; /* Reduzido */
-        }
+        
+        /* A classe .empresa-info será removida do HTML */
 
         main h2 {
             color: var(--cor-secundaria);
-            font-size: 1.8em; /* Serviço um pouco menor */
-            margin-top: 15px; /* Reduzido */
-            margin-bottom: 10px; /* Reduzido */
+            font-size: 1.8em;
+            margin-top: 15px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .precos {
-            margin-bottom: 25px; /* Reduzido */
+            margin-bottom: 25px;
         }
 
         .preco-antigo {
-            font-size: 1.2em; /* Reduzido */
+            font-size: 1.2em;
             color: #999;
             text-decoration: line-through;
             margin-bottom: 3px;
@@ -86,7 +84,7 @@
         }
 
         .preco-novo {
-            font-size: 2.8em; /* Ainda grande, mas ajustado */
+            font-size: 2.8em;
             color: var(--cor-desconto);
             font-weight: 700;
             margin-top: 0;
@@ -94,37 +92,37 @@
 
         .preco-novo span {
             display: block;
-            font-size: 0.6em; /* "Por APENAS" menor */
+            font-size: 0.6em;
             color: var(--cor-texto);
-            margin-bottom: -8px; /* Ajustado */
+            margin-bottom: -8px;
         }
 
         .texto-extra {
-            font-size: 0.95em; /* Um pouco menor */
+            font-size: 0.95em;
             color: var(--cor-texto);
-            margin-bottom: 30px; /* Reduzido */
+            margin-bottom: 30px;
             padding: 0 10px;
         }
 
         .botoes-container {
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Espaço entre botões reduzido */
-            margin-top: 15px; /* Reduzido */
+            gap: 12px;
+            margin-top: 15px;
             align-items: center;
         }
 
         .botao {
             display: inline-block;
-            padding: 16px 30px; /* Botão ligeiramente menor */
+            padding: 16px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 1.1em; /* Fonte ligeiramente menor */
+            font-size: 1.1em;
             transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1); /* Sombra mais compacta */
-            width: 95%; /* Ocupa mais largura em mobile */
-            max-width: 280px; /* Limita largura em telas maiores */
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 280px;
             box-sizing: border-box;
         }
 
@@ -135,7 +133,7 @@
 
         .whatsapp-btn:hover {
             background-color: #1DA851;
-            transform: translateY(-2px); /* Efeito menor */
+            transform: translateY(-2px);
         }
 
         .instagram-btn {
@@ -145,20 +143,20 @@
 
         .instagram-btn:hover {
             background-color: #C12A5E;
-            transform: translateY(-2px); /* Efeito menor */
+            transform: translateY(-2px);
         }
 
         .disclaimer {
-            font-size: 0.8em; /* Bem menor */
-            color: #888; /* Mais sutil */
-            margin-top: 25px; /* Reduzido */
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 25px;
             line-height: 1.4;
         }
 
         footer {
-            margin-top: 30px; /* Reduzido */
-            font-size: 0.7em; /* Menor */
-            color: #BBBBBB; /* Mais sutil */
+            margin-top: 30px;
+            font-size: 0.7em;
+            color: #BBBBBB;
         }
 
         /* MEDIA QUERIES para responsividade */
@@ -167,7 +165,7 @@
                 padding: 15px;
             }
             header h1 {
-                font-size: 1.8em;
+                font-size: 0;
             }
             main h2 {
                 font-size: 1.4em;
@@ -190,21 +188,19 @@
             }
         }
     </style>
-    <meta property="og:title" content="✨ Brilhe no Espaço Tai Botelho! ✨">
-    <meta property="og:description" content="Oferta única: Lavar + Escovar por SÓ R$40! Seu cabelo merece!">
+    <meta property="og:title" content="✨ Promoção Incrível - Espaço Tai Botelho ✨">
+    <meta property="og:description" content="Oferta Lavar + Escovar por SÓ R$40! Cabelo impecável!">
     <meta property="og:image" content="https://raw.githubusercontent.com/wiggers12/publicidade/main/imagem.jpg">
     <meta property="og:url" content="https://wiggers12.github.io/publicidade/">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1 id="titulo-promocao">Cabelo Perfeito? É no Espaço Tai Botelho!</h1>
-        </header>
+            <h1 id="titulo-promocao"></h1> </header>
 
         <img id="imagem-promocao" src="https://raw.githubusercontent.com/wiggers12/publicidade/main/imagem.jpg" alt="Cabelo Escovado Perfeito no Espaço Tai Botelho" class="logo-promocao">
 
         <main>
-            <p class="empresa-info">Sua beleza começa aqui.</p>
             <h2 id="servico-nome">Lavar, Secar e Escovar</h2>
             
             <div class="precos">
