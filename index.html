@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promoção Incrível! - Espaço Tai Botelho</title>
+    <title>Espaço Tai Botelho - Sua Beleza Começa Aqui!</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --cor-primaria: #FF6EB4; /* Rosa mais vibrante */
+            --cor-primaria: #FF6EB4; /* Rosa vibrante */
             --cor-secundaria: #8B008B; /* Roxo escuro */
             --cor-texto: #333333;
-            --cor-fundo: #F8F8F8; /* Cinza claro quase branco */
+            --cor-fundo: #F0F2F5; /* Cinza claro */
             --cor-desconto: #28A745; /* Verde para destaque do preço */
             --cor-borda-card: #E0E0E0;
         }
 
         body {
-            font-family: 'Poppins', sans-serif; /* Nova fonte */
+            font-family: 'Poppins', sans-serif;
             background-color: var(--cor-fundo);
             color: var(--cor-texto);
             display: flex;
@@ -26,186 +26,185 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 15px; /* Reduzido um pouco */
             box-sizing: border-box;
-            line-height: 1.6;
+            line-height: 1.5; /* Ajustado */
         }
 
         .container {
             background-color: #FFFFFF;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Sombra mais compacta */
+            padding: 25px; /* Reduzido um pouco */
             text-align: center;
-            max-width: 500px;
+            max-width: 450px; /* Levemente mais estreito */
             width: 100%;
             box-sizing: border-box;
             border: 1px solid var(--cor-borda-card);
         }
 
-        .logo-promocao { /* Estilo para a imagem da promoção/salão */
+        .logo-promocao {
             max-width: 100%;
             height: auto;
-            border-radius: 10px; /* Cantos arredondados para a imagem */
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            margin-bottom: 20px; /* Reduzido */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
 
         header h1 {
             color: var(--cor-primaria);
-            font-size: 2.5em; /* Título maior */
-            margin-bottom: 10px;
-            font-weight: 700; /* Mais negrito */
-            line-height: 1.2;
+            font-size: 2.2em; /* Título um pouco menor */
+            margin-bottom: 8px; /* Reduzido */
+            font-weight: 700;
+            line-height: 1.1;
         }
 
         .empresa-info {
-            font-size: 1.1em;
+            font-size: 1em; /* Levemente menor */
             color: #666;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduzido */
         }
 
         main h2 {
             color: var(--cor-secundaria);
-            font-size: 2em; /* Serviço mais destacado */
-            margin-top: 20px;
-            margin-bottom: 15px;
+            font-size: 1.8em; /* Serviço um pouco menor */
+            margin-top: 15px; /* Reduzido */
+            margin-bottom: 10px; /* Reduzido */
             font-weight: 600;
         }
 
         .precos {
-            margin-bottom: 30px;
+            margin-bottom: 25px; /* Reduzido */
         }
 
         .preco-antigo {
-            font-size: 1.4em;
+            font-size: 1.2em; /* Reduzido */
             color: #999;
             text-decoration: line-through;
-            margin-bottom: 5px;
-            display: block; /* Garante que fique em uma linha separada */
+            margin-bottom: 3px;
+            display: block;
         }
 
         .preco-novo {
-            font-size: 3.2em; /* Preço novo BEM grande */
+            font-size: 2.8em; /* Ainda grande, mas ajustado */
             color: var(--cor-desconto);
             font-weight: 700;
             margin-top: 0;
         }
 
         .preco-novo span {
-            display: block; /* Garante que o valor fique abaixo do "Por APENAS" */
-            font-size: 0.7em; /* "Por APENAS" um pouco menor */
-            color: var(--cor-texto); /* Cor mais neutra para o texto "Por APENAS" */
-            margin-bottom: -10px;
+            display: block;
+            font-size: 0.6em; /* "Por APENAS" menor */
+            color: var(--cor-texto);
+            margin-bottom: -8px; /* Ajustado */
         }
 
         .texto-extra {
-            font-size: 1.1em;
+            font-size: 0.95em; /* Um pouco menor */
             color: var(--cor-texto);
-            margin-bottom: 35px;
-            padding: 0 15px;
+            margin-bottom: 30px; /* Reduzido */
+            padding: 0 10px;
         }
 
-        /* Container para os botões para que fiquem um do lado do outro ou empilhados */
         .botoes-container {
-            display: flex; /* Para colocá-los lado a lado */
-            flex-direction: column; /* Por padrão, empilha em telas pequenas */
-            gap: 15px; /* Espaço entre os botões */
-            margin-top: 20px;
-            align-items: center; /* Centraliza os botões */
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Espaço entre botões reduzido */
+            margin-top: 15px; /* Reduzido */
+            align-items: center;
         }
 
         .botao {
-            display: inline-block; /* Mantém a compatibilidade com o display */
-            padding: 18px 35px; /* Botão maior */
+            display: inline-block;
+            padding: 16px 30px; /* Botão ligeiramente menor */
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 700; /* Mais negrito */
-            font-size: 1.2em; /* Fonte maior no botão */
+            font-weight: 700;
+            font-size: 1.1em; /* Fonte ligeiramente menor */
             transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Sombra mais proeminente */
-            width: 90%; /* Ocupa quase toda a largura em mobile */
-            max-width: 300px; /* Limita a largura em telas maiores */
-            box-sizing: border-box; /* Garante que padding não estoure a largura */
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1); /* Sombra mais compacta */
+            width: 95%; /* Ocupa mais largura em mobile */
+            max-width: 280px; /* Limita largura em telas maiores */
+            box-sizing: border-box;
         }
 
-        /* Estilos específicos para o botão do WhatsApp */
         .whatsapp-btn {
-            background-color: #25D366; /* Verde WhatsApp */
+            background-color: #25D366;
             color: white;
         }
 
         .whatsapp-btn:hover {
-            background-color: #1DA851; /* Verde mais escuro no hover */
-            transform: translateY(-3px);
+            background-color: #1DA851;
+            transform: translateY(-2px); /* Efeito menor */
         }
 
-        /* Estilos específicos para o botão do Instagram */
         .instagram-btn {
-            background-color: #E1306C; /* Rosa Instagram */
+            background-color: #E1306C;
             color: white;
         }
 
         .instagram-btn:hover {
-            background-color: #C12A5E; /* Rosa mais escuro no hover */
-            transform: translateY(-3px);
+            background-color: #C12A5E;
+            transform: translateY(-2px); /* Efeito menor */
         }
 
         .disclaimer {
-            font-size: 0.85em;
-            color: #777;
-            margin-top: 30px;
-            line-height: 1.5;
+            font-size: 0.8em; /* Bem menor */
+            color: #888; /* Mais sutil */
+            margin-top: 25px; /* Reduzido */
+            line-height: 1.4;
         }
 
         footer {
-            margin-top: 40px;
-            font-size: 0.75em;
-            color: #AAAAAA;
+            margin-top: 30px; /* Reduzido */
+            font-size: 0.7em; /* Menor */
+            color: #BBBBBB; /* Mais sutil */
         }
 
         /* MEDIA QUERIES para responsividade */
         @media (max-width: 480px) {
             .container {
-                padding: 20px;
-                border-radius: 10px;
+                padding: 15px;
             }
             header h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
             main h2 {
-                font-size: 1.6em;
+                font-size: 1.4em;
             }
             .preco-novo {
-                font-size: 2.8em;
+                font-size: 2.5em;
             }
             .botao {
-                padding: 15px 25px;
-                font-size: 1.1em;
+                padding: 12px 20px;
+                font-size: 1em;
             }
         }
         @media (min-width: 481px) {
             .botoes-container {
-                flex-direction: row; /* Lado a lado em telas maiores */
-                justify-content: center; /* Centraliza horizontalmente */
+                flex-direction: row;
+                justify-content: center;
             }
             .botao {
-                width: auto; /* Deixa a largura automática para caber lado a lado */
+                width: auto;
             }
         }
     </style>
-    <meta property="og:title" content="🤩 Mega Promoção no Espaço Tai Botelho!">
-    <meta property="og:description" content="Lave, Seque e Escove de R$60 por SÓ R$40! Cabelo impecável com preço incrível. Agende já!">
-    <meta property="og:image" content="https://raw.githubusercontent.com/wiggers12/publicidade/main/imagem.jpg"> <meta property="og:url" content="https://wiggers12.github.io/publicidade/"> </head>
+    <meta property="og:title" content="✨ Brilhe no Espaço Tai Botelho! ✨">
+    <meta property="og:description" content="Oferta única: Lavar + Escovar por SÓ R$40! Seu cabelo merece!">
+    <meta property="og:image" content="https://raw.githubusercontent.com/wiggers12/publicidade/main/imagem.jpg">
+    <meta property="og:url" content="https://wiggers12.github.io/publicidade/">
+</head>
 <body>
     <div class="container">
         <header>
-            <h1 id="titulo-promocao">🌟 Brilhe Mais com Essa Promoção! 🌟</h1>
+            <h1 id="titulo-promocao">Cabelo Perfeito? É no Espaço Tai Botelho!</h1>
         </header>
 
         <img id="imagem-promocao" src="https://raw.githubusercontent.com/wiggers12/publicidade/main/imagem.jpg" alt="Cabelo Escovado Perfeito no Espaço Tai Botelho" class="logo-promocao">
+
         <main>
-            <p class="empresa-info">No **Espaço Tai Botelho**</p>
+            <p class="empresa-info">Sua beleza começa aqui.</p>
             <h2 id="servico-nome">Lavar, Secar e Escovar</h2>
             
             <div class="precos">
@@ -217,24 +216,25 @@
             </div>
 
             <p class="texto-extra" id="texto-extra-conteudo">
-                Sua chance de ter o cabelo impecável, com o brilho que você merece e um precinho que cabe no bolso! 💖
+                Aproveite essa chance de brilhar com um visual impecável!
             </p>
 
             <div class="botoes-container">
                 <a id="botao-whatsapp" href="https://wa.me/5551984718554" target="_blank" class="botao whatsapp-btn">
-                    Agendar pelo WhatsApp 💬
+                    Agende via WhatsApp 💬
                 </a>
                 <a id="botao-instagram" href="https://www.instagram.com/espaco_taaibotelho/" target="_blank" class="botao instagram-btn">
-                    Ver Instagram do Salão 📸
+                    Conheça o Instagram 📸
                 </a>
             </div>
+
             <p class="disclaimer" id="condicoes-promocao">
-                Promoção válida por tempo limitado. Agendamento sujeito à disponibilidade. Consulte mais detalhes diretamente com o salão.
+                Promoção por tempo limitado. Consulte condições.
             </p>
         </main>
 
         <footer>
-            <p>&copy; 2025 Sua Propaganda Digital. Todos os direitos reservados.</p>
+            <p>&copy; 2025 Espaço Tai Botelho. Todos os direitos reservados.</p>
         </footer>
     </div>
 </body>
