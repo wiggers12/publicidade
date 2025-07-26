@@ -97,6 +97,17 @@
         <h1 class="text-4xl font-bold mb-4 text-green-400">Click Rápido!</h1>
         <p class="text-lg mb-6">Clique nos quadrados <span class="text-green-400 font-bold">VERDES</span> o mais rápido possível!</p>
 
+        <!-- Seção do Prêmio Acumulado -->
+        <div class="mb-8 p-4 bg-gray-700 rounded-lg shadow-inner">
+            <p class="text-xl font-semibold text-gray-300">Valor Atual do Prêmio:</p>
+            <p class="text-5xl font-bold text-green-400 mt-2">R$ <span id="prizePoolDisplay">0.00</span></p>
+            <p class="text-sm text-gray-400 mt-3" id="currentPeriodDisplay">Carregando período...</p>
+        </div>
+
+        <button id="buyEntryButton" class="w-full py-4 px-6 rounded-lg text-2xl font-bold transition duration-300 ease-in-out transform bg-gradient-to-r from-blue-600 to-purple-600 hover:scale-105 hover:from-blue-700 hover:to-purple-700 shadow-lg mb-6">
+            Comprar Entrada (R$ 5,00)
+        </button>
+
         <div class="flex justify-between items-center mb-4">
             <div class="text-xl font-semibold">Pontuação: <span id="score">0</span></div>
             <div class="text-xl font-semibold">Tempo: <span id="timer">30</span>s</div>
@@ -120,6 +131,10 @@
                 <!-- Ranking items will be loaded here -->
             </ul>
             <p class="text-sm mt-4 text-gray-400">Seu ID de Usuário: <span id="userIdDisplay" class="font-mono text-gray-300 break-all"></span></p>
+            <p class="text-xs text-gray-500 mt-2">
+                Ao comprar uma entrada, você concorda com os termos e condições do jogo.
+                O jogador com a maior pontuação ao final do período leva o prêmio.
+            </p>
         </div>
     </div>
 
@@ -146,14 +161,17 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        let userId = null; // ID do usuário atual
-        let gameInterval; // Intervalo para geração de quadrados
-        let timerInterval; // Intervalo do contador de tempo
+        // Variáveis de estado do jogo
+        let userId = null;
+        let gameInterval;
+        let timerInterval;
         let score = 0;
-        let timeLeft = 30; // Tempo de jogo em segundos
+        let timeLeft = 30;
         let gameRunning = false;
         const colors = ['green', 'red', 'blue', 'yellow'];
         const targetColor = 'green';
+
+        // Referências aos elementos DOM
         const gameArea = document.getElementById('gameArea');
         const scoreDisplay = document.getElementById('score');
         const timerDisplay = document.getElementById('timer');
@@ -163,6 +181,9 @@
         const userIdDisplay = document.getElementById('userIdDisplay');
         const playerNameInput = document.getElementById('playerNameInput');
         const playerInputSection = document.getElementById('playerInputSection');
+        const prizePoolDisplay = document.getElementById('prizePoolDisplay');
+        const currentPeriodDisplay = document.getElementById('currentPeriodDisplay');
+        const buyEntryButton = document.getElementById('buyEntryButton');
 
         // Elementos da caixa de mensagem personalizada
         const messageBox = document.getElementById('messageBox');
@@ -198,7 +219,7 @@
                 } else {
                     await signInAnonymously(auth);
                 }
-                userId = auth.currentUser?.uid || crypto.randomUUID(); // Usa UID se autenticado, senão um UUID
+                userId = auth.currentUser?.uid || crypto.randomUUID();
                 userIdDisplay.textContent = userId;
                 console.log('Usuário autenticado:', userId);
             } catch (error) {
@@ -229,6 +250,7 @@
             gameArea.classList.remove('hidden');
             startButton.classList.add('hidden');
             playerInputSection.classList.add('hidden'); // Esconde o input de apelido durante o jogo
+            buyEntryButton.disabled = true; // Desabilita o botão de compra durante o jogo
             gameRunning = true;
 
             // Inicia o contador de tempo
@@ -254,12 +276,13 @@
             gameArea.classList.add('hidden');
             startButton.classList.remove('hidden');
             playerInputSection.classList.remove('hidden'); // Mostra o input de apelido novamente
+            buyEntryButton.disabled = false; // Habilita o botão de compra
 
             showMessageBox(
                 "Fim de Jogo!",
                 `Sua pontuação final: ${score}.`,
                 async () => {
-                    if (auth.currentUser && userId) { // Garante que o usuário está autenticado antes de salvar
+                    if (auth.currentUser && userId) {
                         const playerName = playerNameInput.value.trim();
                         await saveScore(score, playerName);
                         await loadRanking(); // Recarrega o ranking após salvar a pontuação
@@ -317,7 +340,6 @@
         async function saveScore(finalScore, playerName) {
             if (!userId) {
                 console.error("Erro: userId não definido para salvar pontuação.");
-                showMessageBox("Erro ao Salvar", "Seu ID de usuário não foi encontrado. Tente reiniciar o jogo.");
                 return;
             }
 
@@ -350,7 +372,7 @@
                     console.log("Primeira pontuação do usuário salva!");
                 }
             } catch (e) {
-                console.error("Erro ao adicionar/atualizar documento: ", e);
+                console.error("Erro ao adicionar/atualizar documento de ranking: ", e);
                 showMessageBox("Erro ao Salvar", "Não foi possível salvar sua pontuação. Verifique sua conexão.");
             }
         }
@@ -407,19 +429,98 @@
             }
         }
 
+        /**
+         * Carrega e ouve as mudanças do prêmio e período do Firestore.
+         */
+        function setupPrizePoolListener() {
+            const prizePoolDocRef = doc(db, `artifacts/${appId}/public/data/prizePools`, 'current');
+            onSnapshot(prizePoolDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const amount = data.amount || 0;
+                    prizePoolDisplay.textContent = amount.toFixed(2);
+
+                    const startDate = data.startDate ? new Date(data.startDate.seconds * 1000).toLocaleDateString('pt-BR') : 'N/A';
+                    const endDate = data.endDate ? new Date(data.endDate.seconds * 1000).toLocaleDateString('pt-BR') : 'N/A';
+                    currentPeriodDisplay.textContent = `Período: ${startDate} - ${endDate}`;
+                } else {
+                    prizePoolDisplay.textContent = '0.00';
+                    currentPeriodDisplay.textContent = "Nenhum período ativo.";
+                }
+            }, (error) => {
+                console.error("Erro ao carregar prizePool:", error);
+                showMessageBox("Erro", "Não foi possível carregar o prêmio. Tente recarregar.");
+            });
+        }
+
+        /**
+         * Função para simular a compra de uma entrada.
+         * IMPORTANTE: Em um sistema real, esta função chamaria um Firebase Cloud Function
+         * para processar o pagamento de forma segura e atualizar o Firestore no backend.
+         * A lógica aqui é apenas para DEMONSTRAÇÃO.
+         */
+        async function handleBuyEntry() {
+            if (!userId) {
+                showMessageBox("Erro", "Usuário não autenticado. Tente novamente.");
+                return;
+            }
+
+            buyEntryButton.disabled = true; // Desabilita o botão para evitar cliques múltiplos
+            buyEntryButton.textContent = 'Processando...';
+            showMessageBox("Processando...", "Aguarde enquanto sua entrada é processada.");
+
+            try {
+                // SIMULAÇÃO DE PAGAMENTO BEM-SUCEDIDO
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simula delay de rede
+                const paymentSuccess = Math.random() > 0.1; // 90% de chance de sucesso
+
+                if (paymentSuccess) {
+                    // Na vida real, o Cloud Function atualizaria o Firestore.
+                    // Aqui, vamos simular a atualização do prizePool para demonstração.
+                    const prizePoolDocRef = doc(db, `artifacts/${appId}/public/data/prizePools`, 'current');
+                    const docSnap = await getDoc(prizePoolDocRef);
+                    let newAmount = 5; // Valor da entrada (ex: R$5.00)
+
+                    if (docSnap.exists()) {
+                        newAmount += docSnap.data().amount || 0;
+                        await setDoc(prizePoolDocRef, { amount: newAmount, lastUpdate: new Date() }, { merge: true });
+                    } else {
+                        // Define um período inicial de 7 dias se for a primeira entrada
+                        await setDoc(prizePoolDocRef, {
+                            amount: newAmount,
+                            startDate: new Date(),
+                            endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 dias a partir de agora
+                            lastUpdate: new Date()
+                        });
+                    }
+
+                    showMessageBox("Sucesso!", "Sua entrada foi comprada com sucesso! Boa sorte!");
+                } else {
+                    showMessageBox("Falha no Pagamento", "Ocorreu um erro ao processar seu pagamento. Tente novamente.");
+                }
+            } catch (error) {
+                console.error("Erro ao comprar entrada:", error);
+                showMessageBox("Erro", "Ocorreu um erro inesperado. Tente novamente.");
+            } finally {
+                buyEntryButton.disabled = false;
+                buyEntryButton.textContent = 'Comprar Entrada (R$ 5,00)';
+            }
+        }
+
         // Event Listeners
         startButton.addEventListener('click', startGame);
+        buyEntryButton.addEventListener('click', handleBuyEntry);
 
-        // Inicializa a autenticação e carrega o ranking ao carregar a página
+        // Inicializa a autenticação e carrega o ranking/prêmio ao carregar a página
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
                 userIdDisplay.textContent = userId;
                 await loadRanking();
+                setupPrizePoolListener(); // Inicia o listener do prêmio
             } else {
-                // Se não houver usuário logado, tente autenticar anonimamente
                 await authenticateUser();
-                // A carga do ranking será feita após a autenticação bem-sucedida
+                // A carga do ranking e o listener do prêmio serão feitos após a autenticação bem-sucedida
             }
         });
     </script>
