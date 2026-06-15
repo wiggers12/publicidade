@@ -1,6 +1,329 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+<head><!DOCTYPE html>
+<html lang="pt-BR">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TowGo - Guincho Inteligente</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f2f6fb;
+}
+
+header{
+    background:#0d6efd;
+    color:white;
+    text-align:center;
+    padding:20px;
+    font-size:28px;
+    font-weight:bold;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:15px;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#0d6efd;
+    margin-bottom:10px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    margin-bottom:10px;
+}
+
+button{
+    width:100%;
+    border:none;
+    background:#0d6efd;
+    color:white;
+    padding:14px;
+    border-radius:10px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0b5ed7;
+}
+
+.mapa{
+    height:250px;
+    border-radius:15px;
+    background:
+    linear-gradient(45deg,#d7e8ff 25%,transparent 25%),
+    linear-gradient(-45deg,#d7e8ff 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#d7e8ff 75%),
+    linear-gradient(-45deg,transparent 75%,#d7e8ff 75%);
+    background-size:40px 40px;
+    background-color:#eaf2ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0d6efd;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.hidden{
+    display:none;
+}
+
+.driver{
+    text-align:center;
+}
+
+.driver img{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    margin-bottom:10px;
+}
+
+.status{
+    text-align:center;
+    font-weight:bold;
+    color:#0d6efd;
+    margin-top:10px;
+}
+
+.badge{
+    background:#198754;
+    color:white;
+    padding:6px 12px;
+    border-radius:20px;
+    display:inline-block;
+    margin-top:5px;
+}
+
+.tabs{
+    display:flex;
+    margin-bottom:15px;
+}
+
+.tabs button{
+    border-radius:0;
+}
+
+.active{
+    background:#198754 !important;
+}
+
+.footer{
+    text-align:center;
+    color:#888;
+    padding:20px;
+}
+</style>
+</head>
+<body>
+
+<header>
+🚛 TowGo
+</header>
+
+<div class="container">
+
+<div class="tabs">
+<button id="btnCliente" class="active">Cliente</button>
+<button id="btnGuincho">Guincheiro</button>
+</div>
+
+<!-- CLIENTE -->
+
+<div id="cliente">
+
+<div class="card">
+<div class="mapa">
+📍 MAPA
+</div>
+</div>
+
+<div class="card">
+<h2>Solicitar Guincho</h2>
+
+<input type="text" placeholder="Localização atual">
+
+<input type="text" placeholder="Destino">
+
+<select>
+<option>Tipo do veículo</option>
+<option>Carro</option>
+<option>Moto</option>
+<option>SUV</option>
+<option>Caminhonete</option>
+</select>
+
+<select>
+<option>Motivo</option>
+<option>Pane Mecânica</option>
+<option>Pane Elétrica</option>
+<option>Pneu Furado</option>
+<option>Acidente</option>
+<option>Sem Combustível</option>
+</select>
+
+<button onclick="solicitar()">
+Solicitar Guincho
+</button>
+
+<div class="status" id="status"></div>
+
+</div>
+
+<div class="card hidden" id="motoristaCard">
+
+<div class="driver">
+
+<img src="https://i.pravatar.cc/150?img=12">
+
+<h3>Carlos Silva</h3>
+
+<div class="badge">
+⭐ 4.9
+</div>
+
+<p style="margin-top:10px">
+Guincho Plataforma
+</p>
+
+<p>
+Placa: IJK-2345
+</p>
+
+<p>
+📞 (51) 99999-8888
+</p>
+
+<p style="margin-top:15px;color:#198754;font-weight:bold;">
+Chegada estimada: 12 min
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- GUINCHEIRO -->
+
+<div id="guincheiro" class="hidden">
+
+<div class="card">
+
+<h2>Painel do Guincheiro</h2>
+
+<p><b>Status:</b> Online</p>
+
+<br>
+
+<button onclick="novaCorrida()">
+Procurar Chamados
+</button>
+
+</div>
+
+<div class="card hidden" id="corridaCard">
+
+<h2>Novo Chamado</h2>
+
+<p><b>Cliente:</b> João Oliveira</p>
+
+<p><b>Veículo:</b> Gol 2018</p>
+
+<p><b>Problema:</b> Pane Mecânica</p>
+
+<p><b>Distância:</b> 4,2 km</p>
+
+<br>
+
+<button>
+Aceitar Chamado
+</button>
+
+</div>
+
+</div>
+
+<div class="footer">
+TowGo © 2026
+</div>
+
+</div>
+
+<script>
+
+const cliente = document.getElementById("cliente");
+const guincheiro = document.getElementById("guincheiro");
+
+document.getElementById("btnCliente").onclick = ()=>{
+cliente.classList.remove("hidden");
+guincheiro.classList.add("hidden");
+
+document.getElementById("btnCliente").classList.add("active");
+document.getElementById("btnGuincho").classList.remove("active");
+}
+
+document.getElementById("btnGuincho").onclick = ()=>{
+guincheiro.classList.remove("hidden");
+cliente.classList.add("hidden");
+
+document.getElementById("btnGuincho").classList.add("active");
+document.getElementById("btnCliente").classList.remove("active");
+}
+
+function solicitar(){
+
+const status = document.getElementById("status");
+
+status.innerHTML =
+"🔎 Procurando guincho próximo...";
+
+setTimeout(()=>{
+status.innerHTML =
+"✅ Guincho encontrado!";
+document
+.getElementById("motoristaCard")
+.classList.remove("hidden");
+},3000);
+
+}
+
+function novaCorrida(){
+
+document
+.getElementById("corridaCard")
+.classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+</html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Click Rápido - O Melhor Leva Tudo!</title>
