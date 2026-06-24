@@ -1,218 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bolão Brasil x Escócia</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #009c3b, #ffdf00);
-      color: #111;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bolão Brasil x Escócia</title>
 
-    .container {
-      max-width: 430px;
-      margin: 20px auto;
-      background: #fff;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
 
-    h1 {
-      text-align: center;
-      color: #002776;
-      margin-bottom: 5px;
-    }
+body{
+    background:linear-gradient(135deg,#009C3B,#FFDF00);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
 
-    .subtitulo {
-      text-align: center;
-      font-weight: bold;
-      color: #009c3b;
-      margin-bottom: 20px;
-    }
+.card{
+    background:#fff;
+    width:100%;
+    max-width:400px;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
 
-    .info {
-      background: #f1f5f9;
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
+h1{
+    text-align:center;
+    color:#002776;
+    margin-bottom:10px;
+}
 
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: bold;
-      color: #002776;
-    }
+p{
+    text-align:center;
+    color:#555;
+    margin-bottom:25px;
+}
 
-    input, select {
-      width: 100%;
-      padding: 12px;
-      margin-top: 6px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
+.placar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+}
 
-    .placar {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+input{
+    flex:1;
+    height:60px;
+    text-align:center;
+    font-size:28px;
+    font-weight:bold;
+    border:2px solid #ddd;
+    border-radius:12px;
+}
 
-    .placar input {
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-    }
+.x{
+    font-size:30px;
+    font-weight:bold;
+}
 
-    .x {
-      font-size: 22px;
-      font-weight: bold;
-    }
+button{
+    width:100%;
+    height:55px;
+    border:none;
+    border-radius:12px;
+    background:#002776;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-    button {
-      width: 100%;
-      margin-top: 25px;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      background: #002776;
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+button:hover{
+    background:#001d57;
+}
 
-    button:hover {
-      background: #001b55;
-    }
-
-    .resultado {
-      margin-top: 25px;
-      background: #e0f2fe;
-      padding: 15px;
-      border-radius: 12px;
-      display: none;
-      line-height: 1.7;
-    }
-
-    .premio {
-      margin-top: 20px;
-      background: #fff7ed;
-      border-left: 5px solid #f97316;
-      padding: 15px;
-      border-radius: 10px;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 13px;
-      color: #555;
-    }
-  </style>
+.resultado{
+    margin-top:20px;
+    padding:15px;
+    border-radius:12px;
+    background:#e8f5e9;
+    text-align:center;
+    display:none;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>🇧🇷 Bolão Brasil x Escócia 🏴</h1>
-    <div class="subtitulo">Copa do Mundo 2026</div>
+<div class="card">
 
-    <div class="info">
-      📅 <strong>Data:</strong> 24/06/2026<br>
-      ⏰ <strong>Horário:</strong> 19h00<br>
-      📍 <strong>Local:</strong> Miami, EUA
-    </div>
+    <h1>🇧🇷 Brasil x Escócia 🏴</h1>
+    <p>Faça seu palpite</p>
 
-    <label>Nome do participante</label>
-    <input type="text" id="nome" placeholder="Digite seu nome">
-
-    <label>Placar do jogo</label>
     <div class="placar">
-      <input type="number" id="brasil" placeholder="BR" min="0">
-      <span class="x">x</span>
-      <input type="number" id="escocia" placeholder="ESC" min="0">
+        <input type="number" id="brasil" min="0" placeholder="BR">
+        <span class="x">X</span>
+        <input type="number" id="escocia" min="0" placeholder="ESC">
     </div>
 
-    <label>Quem marca o primeiro gol?</label>
-    <select id="primeiroGol">
-      <option value="">Selecione</option>
-      <option>Neymar</option>
-      <option>Vini Jr</option>
-      <option>Rodrygo</option>
-      <option>Martinelli</option>
-      <option>Raphinha</option>
-      <option>Outro</option>
-      <option>Ninguém</option>
-    </select>
-
-    <label>Homem do jogo</label>
-    <select id="homemJogo">
-      <option value="">Selecione</option>
-      <option>Neymar</option>
-      <option>Vini Jr</option>
-      <option>Rodrygo</option>
-      <option>Alisson</option>
-      <option>Casemiro</option>
-      <option>Outro</option>
-    </select>
-
-    <label>Resultado final</label>
-    <select id="resultadoFinal">
-      <option value="">Selecione</option>
-      <option>Vitória do Brasil</option>
-      <option>Empate</option>
-      <option>Vitória da Escócia</option>
-    </select>
-
-    <div class="premio">
-      🎁 <strong>Premiação sugerida</strong><br>
-      🥇 1º lugar: R$ 100<br>
-      🥈 2º lugar: R$ 50<br>
-      🥉 3º lugar: R$ 25
-    </div>
-
-    <button onclick="gerarBolao()">Gerar Palpite</button>
+    <button onclick="registrarPalpite()">
+        Registrar Palpite
+    </button>
 
     <div class="resultado" id="resultado"></div>
 
-    <div class="footer">
-      Bolão criado para diversão entre amigos.
-    </div>
-  </div>
+</div>
 
-  <script>
-    function gerarBolao() {
-      const nome = document.getElementById("nome").value;
-      const brasil = document.getElementById("brasil").value;
-      const escocia = document.getElementById("escocia").value;
-      const primeiroGol = document.getElementById("primeiroGol").value;
-      const homemJogo = document.getElementById("homemJogo").value;
-      const resultadoFinal = document.getElementById("resultadoFinal").value;
-      const resultado = document.getElementById("resultado");
+<script>
 
-      if (!nome || brasil === "" || escocia === "" || !primeiroGol || !homemJogo || !resultadoFinal) {
-        alert("Preencha todos os campos!");
+function registrarPalpite(){
+
+    let brasil = document.getElementById('brasil').value;
+    let escocia = document.getElementById('escocia').value;
+
+    if(brasil === '' || escocia === ''){
+        alert('Informe o placar.');
         return;
-      }
-
-      resultado.style.display = "block";
-      resultado.innerHTML = `
-        <strong>✅ Palpite registrado!</strong><br><br>
-        👤 <strong>Nome:</strong> ${nome}<br>
-        🇧🇷 <strong>Placar:</strong> Brasil ${brasil} x ${escocia} Escócia<br>
-        ⚽ <strong>Primeiro gol:</strong> ${primeiroGol}<br>
-        🌟 <strong>Homem do jogo:</strong> ${homemJogo}<br>
-        🏆 <strong>Resultado:</strong> ${resultadoFinal}
-      `;
     }
-  </script>
+
+    document.getElementById('resultado').style.display = 'block';
+
+    document.getElementById('resultado').innerHTML =
+    `
+    ✅ Seu palpite foi registrado!<br><br>
+    <strong>Brasil ${brasil} x ${escocia} Escócia</strong>
+    `;
+}
+
+</script>
 
 </body>
 </html>
