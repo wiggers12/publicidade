@@ -1,606 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BrincaJá - Aluguel de Brinquedos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bolão Brasil x Escócia</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #009c3b, #ffdf00);
+      color: #111;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    .container {
+      max-width: 430px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 20px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    h1 {
+      text-align: center;
+      color: #002776;
+      margin-bottom: 5px;
+    }
 
-body{
-background:#f5f7fb;
-}
+    .subtitulo {
+      text-align: center;
+      font-weight: bold;
+      color: #009c3b;
+      margin-bottom: 20px;
+    }
 
-header{
-background:linear-gradient(135deg,#1565c0,#0d47a1);
-color:white;
-padding:20px;
-position:sticky;
-top:0;
-z-index:999;
-}
+    .info {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
 
-.logo{
-font-size:30px;
-font-weight:bold;
-text-align:center;
-}
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #002776;
+    }
 
-.slogan{
-text-align:center;
-font-size:14px;
-opacity:.9;
-}
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
 
-.search{
-padding:15px;
-background:white;
-}
+    .placar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
 
-.search input{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#f0f2f5;
-font-size:16px;
-}
+    .placar input {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+    }
 
-.banner{
-margin:15px;
-padding:25px;
-border-radius:20px;
-background:linear-gradient(135deg,#ff9800,#ff5722);
-color:white;
-}
+    .x {
+      font-size: 22px;
+      font-weight: bold;
+    }
 
-.banner h2{
-margin-bottom:10px;
-}
+    button {
+      width: 100%;
+      margin-top: 25px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: #002776;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-.categorias{
-padding:15px;
-}
+    button:hover {
+      background: #001b55;
+    }
 
-.titulo{
-font-size:22px;
-font-weight:600;
-margin-bottom:15px;
-}
+    .resultado {
+      margin-top: 25px;
+      background: #e0f2fe;
+      padding: 15px;
+      border-radius: 12px;
+      display: none;
+      line-height: 1.7;
+    }
 
-.grid-categorias{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:10px;
-}
+    .premio {
+      margin-top: 20px;
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 15px;
+      border-radius: 10px;
+    }
 
-.cat{
-background:white;
-padding:18px;
-border-radius:15px;
-text-align:center;
-box-shadow:0 3px 10px rgba(0,0,0,.08);
-cursor:pointer;
-}
-
-.produtos{
-padding:15px;
-}
-
-.cards{
-display:grid;
-grid-template-columns:1fr;
-gap:15px;
-}
-
-.card{
-background:white;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 4px 15px rgba(0,0,0,.1);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.info{
-padding:15px;
-}
-
-.nome{
-font-size:20px;
-font-weight:600;
-}
-
-.preco{
-color:#ff5722;
-font-size:22px;
-font-weight:bold;
-margin-top:8px;
-}
-
-.btn{
-margin-top:15px;
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#1565c0;
-color:white;
-font-size:16px;
-cursor:pointer;
-}
-
-.btn:hover{
-background:#0d47a1;
-}
-
-nav{
-position:fixed;
-bottom:0;
-width:100%;
-background:white;
-display:flex;
-justify-content:space-around;
-padding:12px;
-box-shadow:0 -2px 10px rgba(0,0,0,.1);
-}
-
-nav button{
-border:none;
-background:none;
-font-size:14px;
-cursor:pointer;
-font-weight:600;
-}
-
-.tela{
-display:none;
-padding-bottom:90px;
-}
-
-.ativa{
-display:block;
-}
-
-.form{
-padding:15px;
-}
-
-.form input,
-.form textarea{
-width:100%;
-padding:12px;
-margin-bottom:10px;
-border:1px solid #ddd;
-border-radius:10px;
-}
-
-.lista{
-padding:15px;
-}
-
-.item{
-background:white;
-padding:15px;
-border-radius:15px;
-margin-bottom:10px;
-}
-
-.sucesso{
-background:#4caf50;
-color:white;
-padding:15px;
-margin:15px;
-border-radius:10px;
-display:none;
-}
-</style>
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      color: #555;
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-<div class="logo">🎈 BrincaJá</div>
-<div class="slogan">A diversão da sua festa a poucos cliques</div>
-</header>
-
-<div id="home" class="tela ativa">
-
-<div class="search">
-<input type="text" placeholder="Pesquisar brinquedos...">
-</div>
-
-<div class="banner">
-<h2>Reserve para sua festa</h2>
-<p>Castelos infláveis, piscina de bolinhas, tobogãs e muito mais.</p>
-</div>
-
-<div class="categorias">
-
-<div class="titulo">
-Categorias
-</div>
-
-<div class="grid-categorias">
-
-<div class="cat">
-🏰<br>Infláveis
-</div>
-
-<div class="cat">
-🎠<br>Cama Elástica
-</div>
-
-<div class="cat">
-🎪<br>Piscina Bolinhas
-</div>
-
-<div class="cat">
-🍿<br>Pipoca
-</div>
-
-</div>
-
-</div>
-
-<div class="produtos">
-
-<div class="titulo">
-Mais Procurados
-</div>
-
-<div class="cards">
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=1200&auto=format&fit=crop">
-<div class="info">
-<div class="nome">
-Castelo Inflável Premium
-</div>
-
-<div class="preco">
-R$ 250
-</div>
-
-<button class="btn" onclick="reservar('Castelo Inflável Premium')">
-Alugar Agora
-</button>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1200&auto=format&fit=crop">
-<div class="info">
-
-<div class="nome">
-Piscina de Bolinhas
-</div>
-
-<div class="preco">
-R$ 180
-</div>
-
-<button class="btn" onclick="reservar('Piscina de Bolinhas')">
-Alugar Agora
-</button>
-
-</div>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=1200&auto=format&fit=crop">
-<div class="info">
-
-<div class="nome">
-Tobogã Gigante
-</div>
-
-<div class="preco">
-R$ 450
-</div>
-
-<button class="btn" onclick="reservar('Tobogã Gigante')">
-Alugar Agora
-</button>
-
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="pedidos" class="tela">
-
-<div class="titulo" style="padding:15px">
-Meus Pedidos
-</div>
-
-<div id="listaPedidos" class="lista">
-</div>
-
-</div>
-
-<div id="locador" class="tela">
-
-<div class="form">
-
-<h2>Cadastrar Brinquedo</h2>
-
-<input id="nomeBrinquedo" placeholder="Nome">
-
-<input id="valorBrinquedo" placeholder="Valor">
-
-<textarea id="descricaoBrinquedo" placeholder="Descrição"></textarea>
-
-<button class="btn" onclick="salvarBrinquedo()">
-Cadastrar
-</button>
-
-</div>
-
-<div id="sucesso" class="sucesso">
-Brinquedo cadastrado com sucesso!
-</div>
-
-<div id="listaLocador" class="lista"></div>
-
-</div>
-
-<nav>
-<button onclick="abrir('home')">🏠 Início</button>
-<button onclick="abrir('pedidos')">📦 Pedidos</button>
-<button onclick="abrir('locador')">🏪 Locador</button>
-</nav>
-
-<script>
-
-function abrir(id){
-
-document.querySelectorAll('.tela')
-.forEach(t=>t.classList.remove('ativa'));
-
-document.getElementById(id)
-.classList.add('ativa');
-
-}
-
-function reservar(nome){
-
-let pedidos=
-JSON.parse(localStorage.getItem('pedidos'))||[];
-
-pedidos.push({
-nome:nome,
-data:new Date().toLocaleString()
-});
-
-localStorage.setItem(
-'pedidos',
-JSON.stringify(pedidos)
-);
-
-alert(
-'Reserva realizada com sucesso!'
-);
-
-carregarPedidos();
-
-} function carregarPedidos(){
-
-let pedidos =
-JSON.parse(localStorage.getItem('pedidos')) || [];
-
-let html = '';
-
-if(pedidos.length === 0){
-
-html = `
-<div class="item">
-Nenhuma reserva encontrada.
-</div>
-`;
-
-}else{
-
-pedidos.forEach((pedido,index)=>{
-
-html += `
-<div class="item">
-<h3>${pedido.nome}</h3>
-<p>Reservado em:</p>
-<small>${pedido.data}</small>
-
-<br><br>
-
-<button
-class="btn"
-onclick="cancelarPedido(${index})">
-Cancelar Reserva
-</button>
-</div>
-`;
-
-});
-
-}
-
-document.getElementById('listaPedidos').innerHTML = html;
-
-}
-
-function cancelarPedido(index){
-
-let pedidos =
-JSON.parse(localStorage.getItem('pedidos')) || [];
-
-pedidos.splice(index,1);
-
-localStorage.setItem(
-'pedidos',
-JSON.stringify(pedidos)
-);
-
-carregarPedidos();
-
-alert('Reserva cancelada!');
-
-}
-
-function salvarBrinquedo(){
-
-let nome =
-document.getElementById('nomeBrinquedo').value;
-
-let valor =
-document.getElementById('valorBrinquedo').value;
-
-let descricao =
-document.getElementById('descricaoBrinquedo').value;
-
-if(
-nome === '' ||
-valor === '' ||
-descricao === ''
-){
-
-alert('Preencha todos os campos');
-
-return;
-
-}
-
-let brinquedos =
-JSON.parse(
-localStorage.getItem('brinquedos')
-) || [];
-
-brinquedos.push({
-
-nome:nome,
-valor:valor,
-descricao:descricao
-
-});
-
-localStorage.setItem(
-'brinquedos',
-JSON.stringify(brinquedos)
-);
-
-document.getElementById('nomeBrinquedo').value='';
-document.getElementById('valorBrinquedo').value='';
-document.getElementById('descricaoBrinquedo').value='';
-
-let sucesso =
-document.getElementById('sucesso');
-
-sucesso.style.display='block';
-
-setTimeout(()=>{
-
-sucesso.style.display='none';
-
-},3000);
-
-carregarBrinquedos();
-
-}
-
-function excluirBrinquedo(index){
-
-let brinquedos =
-JSON.parse(
-localStorage.getItem('brinquedos')
-) || [];
-
-brinquedos.splice(index,1);
-
-localStorage.setItem(
-'brinquedos',
-JSON.stringify(brinquedos)
-);
-
-carregarBrinquedos();
-
-}
-
-function carregarBrinquedos(){
-
-let brinquedos =
-JSON.parse(
-localStorage.getItem('brinquedos')
-) || [];
-
-let html='';
-
-if(brinquedos.length === 0){
-
-html=`
-<div class="item">
-Nenhum brinquedo cadastrado.
-</div>
-`;
-
-}else{
-
-brinquedos.forEach((item,index)=>{
-
-html+=`
-
-<div class="item">
-
-<h3>${item.nome}</h3>
-
-<p>
-💰 Valor: R$ ${item.valor}
-</p>
-
-<p>
-📝 ${item.descricao}
-</p>
-
-<button
-class="btn"
-onclick="excluirBrinquedo(${index})">
-
-Excluir
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-
-document.getElementById(
-'listaLocador'
-).innerHTML = html;
-
-}
-
-carregarPedidos();
-carregarBrinquedos();
-
-</script>
+  <div class="container">
+    <h1>🇧🇷 Bolão Brasil x Escócia 🏴</h1>
+    <div class="subtitulo">Copa do Mundo 2026</div>
+
+    <div class="info">
+      📅 <strong>Data:</strong> 24/06/2026<br>
+      ⏰ <strong>Horário:</strong> 19h00<br>
+      📍 <strong>Local:</strong> Miami, EUA
+    </div>
+
+    <label>Nome do participante</label>
+    <input type="text" id="nome" placeholder="Digite seu nome">
+
+    <label>Placar do jogo</label>
+    <div class="placar">
+      <input type="number" id="brasil" placeholder="BR" min="0">
+      <span class="x">x</span>
+      <input type="number" id="escocia" placeholder="ESC" min="0">
+    </div>
+
+    <label>Quem marca o primeiro gol?</label>
+    <select id="primeiroGol">
+      <option value="">Selecione</option>
+      <option>Neymar</option>
+      <option>Vini Jr</option>
+      <option>Rodrygo</option>
+      <option>Martinelli</option>
+      <option>Raphinha</option>
+      <option>Outro</option>
+      <option>Ninguém</option>
+    </select>
+
+    <label>Homem do jogo</label>
+    <select id="homemJogo">
+      <option value="">Selecione</option>
+      <option>Neymar</option>
+      <option>Vini Jr</option>
+      <option>Rodrygo</option>
+      <option>Alisson</option>
+      <option>Casemiro</option>
+      <option>Outro</option>
+    </select>
+
+    <label>Resultado final</label>
+    <select id="resultadoFinal">
+      <option value="">Selecione</option>
+      <option>Vitória do Brasil</option>
+      <option>Empate</option>
+      <option>Vitória da Escócia</option>
+    </select>
+
+    <div class="premio">
+      🎁 <strong>Premiação sugerida</strong><br>
+      🥇 1º lugar: R$ 100<br>
+      🥈 2º lugar: R$ 50<br>
+      🥉 3º lugar: R$ 25
+    </div>
+
+    <button onclick="gerarBolao()">Gerar Palpite</button>
+
+    <div class="resultado" id="resultado"></div>
+
+    <div class="footer">
+      Bolão criado para diversão entre amigos.
+    </div>
+  </div>
+
+  <script>
+    function gerarBolao() {
+      const nome = document.getElementById("nome").value;
+      const brasil = document.getElementById("brasil").value;
+      const escocia = document.getElementById("escocia").value;
+      const primeiroGol = document.getElementById("primeiroGol").value;
+      const homemJogo = document.getElementById("homemJogo").value;
+      const resultadoFinal = document.getElementById("resultadoFinal").value;
+      const resultado = document.getElementById("resultado");
+
+      if (!nome || brasil === "" || escocia === "" || !primeiroGol || !homemJogo || !resultadoFinal) {
+        alert("Preencha todos os campos!");
+        return;
+      }
+
+      resultado.style.display = "block";
+      resultado.innerHTML = `
+        <strong>✅ Palpite registrado!</strong><br><br>
+        👤 <strong>Nome:</strong> ${nome}<br>
+        🇧🇷 <strong>Placar:</strong> Brasil ${brasil} x ${escocia} Escócia<br>
+        ⚽ <strong>Primeiro gol:</strong> ${primeiroGol}<br>
+        🌟 <strong>Homem do jogo:</strong> ${homemJogo}<br>
+        🏆 <strong>Resultado:</strong> ${resultadoFinal}
+      `;
+    }
+  </script>
 
 </body>
 </html>
