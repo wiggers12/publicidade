@@ -3,269 +3,173 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bolão Brasil x Escócia</title>
+<title>Vendas IA Telecom</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#f3f6fb;color:#111}
+header{background:linear-gradient(135deg,#0f172a,#2563eb);color:white;padding:28px}
+header h1{font-size:28px}
+header p{opacity:.9;margin-top:6px}
 
-body{
-  min-height:100vh;
-  background:linear-gradient(135deg,#009c3b,#ffdf00,#002776);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:18px;
-}
+.container{padding:20px;display:grid;gap:20px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.card{background:white;border-radius:18px;padding:20px;box-shadow:0 8px 25px #0001}
+.card h3{font-size:14px;color:#64748b}
+.card strong{font-size:28px;display:block;margin-top:8px;color:#0f172a}
 
-.card{
-  width:100%;
-  max-width:430px;
-  background:#fff;
-  border-radius:30px;
-  padding:28px;
-  box-shadow:0 25px 60px rgba(0,0,0,.30);
-}
+.section{background:white;border-radius:18px;padding:20px;box-shadow:0 8px 25px #0001}
+.section h2{margin-bottom:15px}
 
-.badge{
-  background:#ffdf00;
-  color:#002776;
-  width:max-content;
-  margin:0 auto 14px;
-  padding:8px 18px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.5px;
-}
+.funil{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.etapa{background:#eff6ff;border-left:5px solid #2563eb;padding:15px;border-radius:12px}
+.etapa b{display:block;margin-bottom:8px}
 
-h1{
-  text-align:center;
-  color:#002776;
-  font-size:28px;
-}
+.lead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb;padding:12px 0}
+.lead button,.btn{background:#22c55e;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold}
+.btn-blue{background:#2563eb}
+.btn-red{background:#ef4444}
 
-.sub{
-  text-align:center;
-  color:#64748b;
-  margin:8px 0 24px;
-}
+.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:20px}
+@media(max-width:800px){.grid{grid-template-columns:1fr}}
 
-.times{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  gap:12px;
-  margin-bottom:24px;
-}
+.rank li{list-style:none;padding:12px;border-bottom:1px solid #eee}
 
-.time{
-  background:#f8fafc;
-  border:1px solid #e2e8f0;
-  border-radius:22px;
-  padding:18px 10px;
-  text-align:center;
-}
-
-.flag{font-size:38px;margin-bottom:6px}
-.nome{font-weight:900;color:#0f172a}
-.vs{font-size:20px;font-weight:900;color:#002776}
-
-label{
-  display:block;
-  color:#002776;
-  font-weight:900;
-  margin:16px 0 8px;
-}
-
-.nome-input{
-  width:100%;
-  height:52px;
-  border-radius:16px;
-  border:2px solid #e2e8f0;
-  padding:0 15px;
-  font-size:16px;
-  outline:none;
-}
-
-.placar{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  gap:12px;
-}
-
-.placar input{
-  width:100%;
-  height:76px;
-  border-radius:22px;
-  border:2px solid #dbeafe;
-  background:#f1f5f9;
-  text-align:center;
-  font-size:38px;
-  font-weight:900;
-  color:#002776;
-  outline:none;
-}
-
-input:focus{
-  border-color:#009c3b;
-  background:white;
-}
-
-.x{
-  font-size:30px;
-  font-weight:900;
-}
-
-button{
-  width:100%;
-  height:56px;
-  border:none;
-  border-radius:18px;
-  margin-top:16px;
-  font-size:16px;
-  font-weight:900;
-  cursor:pointer;
-}
-
-.btn-primary{
-  background:linear-gradient(135deg,#002776,#0047ab);
-  color:white;
-}
-
-.btn-whats{
-  background:#25d366;
-  color:white;
-  display:none;
-}
-
-.btn-copy{
-  background:#f1f5f9;
-  color:#002776;
-  display:none;
-}
-
-.resultado{
-  display:none;
-  margin-top:22px;
-  padding:20px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#ecfdf5,#eff6ff);
-  border:1px solid #bbf7d0;
-  text-align:center;
-}
-
-.resultado small{
-  color:#64748b;
-  font-weight:800;
-}
-
-.resultado strong{
-  display:block;
-  margin-top:8px;
-  font-size:25px;
-  color:#002776;
-}
-
-.footer{
-  margin-top:22px;
-  text-align:center;
-  font-size:12px;
-  color:#64748b;
-}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;margin:6px 0 12px}
+.whatsapp{background:#dcfce7;padding:15px;border-radius:14px;color:#166534}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <div class="badge">BOLÃO OFICIAL</div>
+<header>
+  <h1>Vendas IA Telecom</h1>
+  <p>Sistema inteligente para vender mais planos de telefonia sem depender só de vendedores.</p>
+</header>
 
-  <h1>🇧🇷 Brasil x Escócia 🏴</h1>
-  <div class="sub">Digite seu nome e o resultado do jogo</div>
+<div class="container">
 
-  <div class="times">
-    <div class="time">
-      <div class="flag">🇧🇷</div>
-      <div class="nome">Brasil</div>
+  <div class="cards">
+    <div class="card">
+      <h3>Leads hoje</h3>
+      <strong>245</strong>
+    </div>
+    <div class="card">
+      <h3>Propostas enviadas</h3>
+      <strong>38</strong>
+    </div>
+    <div class="card">
+      <h3>Vendas fechadas</h3>
+      <strong>12</strong>
+    </div>
+    <div class="card">
+      <h3>Faturamento</h3>
+      <strong>R$ 8.940</strong>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Funil de Vendas</h2>
+    <div class="funil">
+      <div class="etapa"><b>Novo Lead</b>245 clientes</div>
+      <div class="etapa"><b>Contato Feito</b>120 clientes</div>
+      <div class="etapa"><b>Proposta</b>38 clientes</div>
+      <div class="etapa"><b>Fechado</b>12 vendas</div>
+      <div class="etapa"><b>Instalação</b>7 agendadas</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="section">
+      <h2>Leads Encontrados Automaticamente</h2>
+
+      <div class="lead">
+        <div>
+          <b>Mercado Silva</b><br>
+          Porto Alegre - Internet empresarial
+        </div>
+        <button>Chamar WhatsApp</button>
+      </div>
+
+      <div class="lead">
+        <div>
+          <b>Clínica Vida</b><br>
+          Precisa de telefone fixo + internet
+        </div>
+        <button>Chamar WhatsApp</button>
+      </div>
+
+      <div class="lead">
+        <div>
+          <b>Oficina Central</b><br>
+          Cliente interessado em plano fibra
+        </div>
+        <button>Chamar WhatsApp</button>
+      </div>
+
+      <div class="lead">
+        <div>
+          <b>Restaurante Itália</b><br>
+          Alto potencial para plano corporativo
+        </div>
+        <button>Chamar WhatsApp</button>
+      </div>
     </div>
 
-    <div class="vs">VS</div>
+    <div class="section">
+      <h2>Ranking dos Vendedores</h2>
+      <ul class="rank">
+        <li>🥇 João — 28 vendas</li>
+        <li>🥈 Carlos — 21 vendas</li>
+        <li>🥉 Maria — 17 vendas</li>
+        <li>Lucas — 9 vendas</li>
+      </ul>
+    </div>
 
-    <div class="time">
-      <div class="flag">🏴</div>
-      <div class="nome">Escócia</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="section">
+      <h2>IA Atendente WhatsApp</h2>
+      <div class="whatsapp">
+        Olá! Sou a assistente virtual da Telecom.<br><br>
+        Me envie seu CEP para consultar cobertura de internet, telefone ou plano empresarial.
+      </div>
+      <br>
+      <input placeholder="Digite o CEP do cliente">
+      <button class="btn btn-blue">Consultar cobertura</button>
+    </div>
+
+    <div class="section">
+      <h2>Novo Lead Manual</h2>
+      <input placeholder="Nome do cliente">
+      <input placeholder="Telefone / WhatsApp">
+      <select>
+        <option>Internet Fibra</option>
+        <option>Plano Móvel</option>
+        <option>Telefone Empresarial</option>
+        <option>PABX / Central Telefônica</option>
+      </select>
+      <button class="btn btn-blue">Cadastrar Lead</button>
+    </div>
+
+  </div>
+
+  <div class="section">
+    <h2>Automação de Recuperação</h2>
+    <p>Clientes que disseram “vou pensar” entram automaticamente em uma sequência de mensagens.</p>
+    <br>
+    <div class="funil">
+      <div class="etapa"><b>Dia 1</b>Mensagem de agradecimento</div>
+      <div class="etapa"><b>Dia 3</b>Oferta especial</div>
+      <div class="etapa"><b>Dia 7</b>Última chance da promoção</div>
+      <div class="etapa"><b>Dia 15</b>Nova tentativa automática</div>
     </div>
   </div>
 
-  <label>Nome do participante</label>
-  <input class="nome-input" type="text" id="participante" placeholder="Ex: Dionatan">
-
-  <label>Resultado do jogo</label>
-  <div class="placar">
-    <input type="number" id="brasil" min="0" placeholder="0">
-    <span class="x">x</span>
-    <input type="number" id="escocia" min="0" placeholder="0">
-  </div>
-
-  <button class="btn-primary" onclick="registrarPalpite()">Registrar Palpite</button>
-  <button class="btn-copy" id="btnCopiar" onclick="copiarPalpite()">Copiar Palpite</button>
-  <button class="btn-whats" id="btnWhats" onclick="enviarWhatsApp()">Enviar no WhatsApp</button>
-
-  <div class="resultado" id="resultado"></div>
-
-  <div class="footer">
-    Bolão entre amigos • Brasil x Escócia
-  </div>
 </div>
-
-<script>
-let mensagemFinal = "";
-
-function registrarPalpite(){
-  const nome = document.getElementById("participante").value.trim();
-  const brasil = document.getElementById("brasil").value;
-  const escocia = document.getElementById("escocia").value;
-  const resultado = document.getElementById("resultado");
-
-  if(nome === ""){
-    alert("Digite o nome do participante.");
-    return;
-  }
-
-  if(brasil === "" || escocia === ""){
-    alert("Informe o placar completo.");
-    return;
-  }
-
-  mensagemFinal =
-`🏆 BOLÃO BRASIL X ESCÓCIA
-
-👤 Participante: ${nome}
-🇧🇷 Brasil ${brasil} x ${escocia} Escócia 🏴
-
-✅ Palpite registrado!`;
-
-  resultado.style.display = "block";
-  resultado.innerHTML = `
-    <small>✅ Palpite registrado com sucesso</small>
-    <strong>${nome}</strong>
-    <strong>Brasil ${brasil} x ${escocia} Escócia</strong>
-  `;
-
-  document.getElementById("btnCopiar").style.display = "block";
-  document.getElementById("btnWhats").style.display = "block";
-}
-
-function copiarPalpite(){
-  navigator.clipboard.writeText(mensagemFinal);
-  alert("Palpite copiado!");
-}
-
-function enviarWhatsApp(){
-  const texto = encodeURIComponent(mensagemFinal);
-  window.open(`https://wa.me/?text=${texto}`, "_blank");
-}
-</script>
 
 </body>
 </html>
