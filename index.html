@@ -1,175 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vendas IA Telecom</title>
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#f3f6fb;color:#111}
-header{background:linear-gradient(135deg,#0f172a,#2563eb);color:white;padding:28px}
-header h1{font-size:28px}
-header p{opacity:.9;margin-top:6px}
-
-.container{padding:20px;display:grid;gap:20px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
-.card{background:white;border-radius:18px;padding:20px;box-shadow:0 8px 25px #0001}
-.card h3{font-size:14px;color:#64748b}
-.card strong{font-size:28px;display:block;margin-top:8px;color:#0f172a}
-
-.section{background:white;border-radius:18px;padding:20px;box-shadow:0 8px 25px #0001}
-.section h2{margin-bottom:15px}
-
-.funil{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
-.etapa{background:#eff6ff;border-left:5px solid #2563eb;padding:15px;border-radius:12px}
-.etapa b{display:block;margin-bottom:8px}
-
-.lead{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5e7eb;padding:12px 0}
-.lead button,.btn{background:#22c55e;color:white;border:0;padding:10px 14px;border-radius:10px;font-weight:bold}
-.btn-blue{background:#2563eb}
-.btn-red{background:#ef4444}
-
-.grid{display:grid;grid-template-columns:1.4fr .8fr;gap:20px}
-@media(max-width:800px){.grid{grid-template-columns:1fr}}
-
-.rank li{list-style:none;padding:12px;border-bottom:1px solid #eee}
-
-input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:10px;margin:6px 0 12px}
-.whatsapp{background:#dcfce7;padding:15px;border-radius:14px;color:#166534}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GessoPro 360</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    body{background:#f4f6f8;color:#1f2937}
+    header{background:linear-gradient(135deg,#111827,#374151);color:white;padding:45px 20px;text-align:center}
+    header h1{font-size:38px;margin-bottom:10px}
+    header p{font-size:18px;color:#d1d5db}
+    .btn{display:inline-block;margin-top:25px;background:#22c55e;color:white;padding:15px 25px;border-radius:12px;text-decoration:none;font-weight:bold}
+    section{padding:35px 20px;max-width:1100px;margin:auto}
+    h2{font-size:28px;margin-bottom:20px;color:#111827}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+    .card{background:white;border-radius:18px;padding:22px;box-shadow:0 10px 25px #0001}
+    .card h3{margin-bottom:10px;color:#111827}
+    .price{font-size:30px;font-weight:bold;color:#22c55e}
+    input,select,textarea{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:10px}
+    button{background:#111827;color:white;border:0;padding:15px;border-radius:12px;width:100%;font-size:16px;font-weight:bold}
+    .status{padding:8px 12px;border-radius:20px;font-size:13px;display:inline-block;margin-top:10px}
+    .novo{background:#dbeafe;color:#1d4ed8}
+    .orcamento{background:#fef3c7;color:#92400e}
+    .fechado{background:#dcfce7;color:#166534}
+    footer{text-align:center;padding:25px;background:#111827;color:white;margin-top:30px}
+  </style>
 </head>
-
 <body>
 
 <header>
-  <h1>Vendas IA Telecom</h1>
-  <p>Sistema inteligente para vender mais planos de telefonia sem depender só de vendedores.</p>
+  <h1>GessoPro 360</h1>
+  <p>Sistema profissional para empresas de gesso, drywall e forro PVC venderem mais todos os dias.</p>
+  <a class="btn" href="https://wa.me/5500000000000">Solicitar orçamento pelo WhatsApp</a>
 </header>
 
-<div class="container">
-
-  <div class="cards">
-    <div class="card">
-      <h3>Leads hoje</h3>
-      <strong>245</strong>
-    </div>
-    <div class="card">
-      <h3>Propostas enviadas</h3>
-      <strong>38</strong>
-    </div>
-    <div class="card">
-      <h3>Vendas fechadas</h3>
-      <strong>12</strong>
-    </div>
-    <div class="card">
-      <h3>Faturamento</h3>
-      <strong>R$ 8.940</strong>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Funil de Vendas</h2>
-    <div class="funil">
-      <div class="etapa"><b>Novo Lead</b>245 clientes</div>
-      <div class="etapa"><b>Contato Feito</b>120 clientes</div>
-      <div class="etapa"><b>Proposta</b>38 clientes</div>
-      <div class="etapa"><b>Fechado</b>12 vendas</div>
-      <div class="etapa"><b>Instalação</b>7 agendadas</div>
-    </div>
-  </div>
-
+<section>
+  <h2>Serviços</h2>
   <div class="grid">
-
-    <div class="section">
-      <h2>Leads Encontrados Automaticamente</h2>
-
-      <div class="lead">
-        <div>
-          <b>Mercado Silva</b><br>
-          Porto Alegre - Internet empresarial
-        </div>
-        <button>Chamar WhatsApp</button>
-      </div>
-
-      <div class="lead">
-        <div>
-          <b>Clínica Vida</b><br>
-          Precisa de telefone fixo + internet
-        </div>
-        <button>Chamar WhatsApp</button>
-      </div>
-
-      <div class="lead">
-        <div>
-          <b>Oficina Central</b><br>
-          Cliente interessado em plano fibra
-        </div>
-        <button>Chamar WhatsApp</button>
-      </div>
-
-      <div class="lead">
-        <div>
-          <b>Restaurante Itália</b><br>
-          Alto potencial para plano corporativo
-        </div>
-        <button>Chamar WhatsApp</button>
-      </div>
+    <div class="card">
+      <h3>Forro de Gesso</h3>
+      <p>Rebaixamento, acabamento fino, sancas e iluminação embutida.</p>
     </div>
-
-    <div class="section">
-      <h2>Ranking dos Vendedores</h2>
-      <ul class="rank">
-        <li>🥇 João — 28 vendas</li>
-        <li>🥈 Carlos — 21 vendas</li>
-        <li>🥉 Maria — 17 vendas</li>
-        <li>Lucas — 9 vendas</li>
-      </ul>
+    <div class="card">
+      <h3>Drywall</h3>
+      <p>Paredes, divisórias, nichos, painéis e ambientes planejados.</p>
     </div>
-
+    <div class="card">
+      <h3>Forro PVC</h3>
+      <p>Instalação rápida, limpa e econômica para residências e comércios.</p>
+    </div>
+    <div class="card">
+      <h3>Reparos</h3>
+      <p>Consertos em teto, trincas, infiltrações e manutenção geral.</p>
+    </div>
   </div>
+</section>
 
+<section>
+  <h2>Orçamento Rápido</h2>
+  <div class="card">
+    <input id="nome" placeholder="Nome do cliente">
+    <input id="telefone" placeholder="WhatsApp">
+    <select id="servico">
+      <option>Forro de gesso</option>
+      <option>Drywall</option>
+      <option>Forro PVC</option>
+      <option>Reparo</option>
+    </select>
+    <input id="largura" type="number" placeholder="Largura em metros">
+    <input id="comprimento" type="number" placeholder="Comprimento em metros">
+    <textarea placeholder="Descreva o serviço ou envie fotos pelo WhatsApp"></textarea>
+    <button onclick="calcular()">Calcular orçamento estimado</button>
+    <h3 id="resultado" style="margin-top:20px"></h3>
+  </div>
+</section>
+
+<section>
+  <h2>Painel de Obras</h2>
   <div class="grid">
-
-    <div class="section">
-      <h2>IA Atendente WhatsApp</h2>
-      <div class="whatsapp">
-        Olá! Sou a assistente virtual da Telecom.<br><br>
-        Me envie seu CEP para consultar cobertura de internet, telefone ou plano empresarial.
-      </div>
-      <br>
-      <input placeholder="Digite o CEP do cliente">
-      <button class="btn btn-blue">Consultar cobertura</button>
+    <div class="card">
+      <h3>Cliente: João Silva</h3>
+      <p>Serviço: Forro de gesso - Sala</p>
+      <p>Medida: 18m²</p>
+      <span class="status novo">Novo lead</span>
     </div>
-
-    <div class="section">
-      <h2>Novo Lead Manual</h2>
-      <input placeholder="Nome do cliente">
-      <input placeholder="Telefone / WhatsApp">
-      <select>
-        <option>Internet Fibra</option>
-        <option>Plano Móvel</option>
-        <option>Telefone Empresarial</option>
-        <option>PABX / Central Telefônica</option>
-      </select>
-      <button class="btn btn-blue">Cadastrar Lead</button>
+    <div class="card">
+      <h3>Cliente: Maria Souza</h3>
+      <p>Serviço: Drywall - Escritório</p>
+      <p>Medida: 32m²</p>
+      <span class="status orcamento">Orçamento enviado</span>
     </div>
-
-  </div>
-
-  <div class="section">
-    <h2>Automação de Recuperação</h2>
-    <p>Clientes que disseram “vou pensar” entram automaticamente em uma sequência de mensagens.</p>
-    <br>
-    <div class="funil">
-      <div class="etapa"><b>Dia 1</b>Mensagem de agradecimento</div>
-      <div class="etapa"><b>Dia 3</b>Oferta especial</div>
-      <div class="etapa"><b>Dia 7</b>Última chance da promoção</div>
-      <div class="etapa"><b>Dia 15</b>Nova tentativa automática</div>
+    <div class="card">
+      <h3>Cliente: Carlos Lima</h3>
+      <p>Serviço: Forro PVC - Banheiro</p>
+      <p>Medida: 9m²</p>
+      <span class="status fechado">Fechado</span>
     </div>
   </div>
+</section>
 
-</div>
+<section>
+  <h2>Dashboard</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Orçamentos no mês</h3>
+      <p class="price">47</p>
+    </div>
+    <div class="card">
+      <h3>Serviços fechados</h3>
+      <p class="price">18</p>
+    </div>
+    <div class="card">
+      <h3>Faturamento estimado</h3>
+      <p class="price">R$ 36.800</p>
+    </div>
+    <div class="card">
+      <h3>Taxa de fechamento</h3>
+      <p class="price">38%</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Antes e Depois</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Sala com sanca iluminada</h3>
+      <p>Imagem demonstrativa do projeto finalizado.</p>
+    </div>
+    <div class="card">
+      <h3>Drywall comercial</h3>
+      <p>Divisória moderna para escritório.</p>
+    </div>
+    <div class="card">
+      <h3>Forro PVC banheiro</h3>
+      <p>Serviço rápido, limpo e econômico.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>GessoPro 360 © Sistema para empresas de gesso venderem mais</p>
+</footer>
+
+<script>
+function calcular(){
+  const largura = Number(document.getElementById("largura").value);
+  const comprimento = Number(document.getElementById("comprimento").value);
+  const servico = document.getElementById("servico").value;
+  const m2 = largura * comprimento;
+
+  let valorM2 = 0;
+
+  if(servico === "Forro de gesso") valorM2 = 95;
+  if(servico === "Drywall") valorM2 = 120;
+  if(servico === "Forro PVC") valorM2 = 75;
+  if(servico === "Reparo") valorM2 = 150;
+
+  const total = m2 * valorM2;
+
+  document.getElementById("resultado").innerHTML =
+    `Área: ${m2.toFixed(2)}m²<br>Orçamento estimado: R$ ${total.toFixed(2)}`;
+}
+</script>
 
 </body>
 </html>
