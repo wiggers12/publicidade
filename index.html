@@ -1,247 +1,573 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Team DM Jiu-Jítsu</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-body{background:#000;color:#fff}
-.app{max-width:430px;margin:auto;min-height:100vh;background:#050505;padding-bottom:80px}
-.screen{display:none;min-height:100vh;padding-bottom:90px}
-.screen.active{display:block}
-.header{padding:20px;background:linear-gradient(180deg,#080808,#111);display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:34px;font-weight:900;font-style:italic;line-height:.9}
-.logo span{font-size:16px;letter-spacing:5px}
-.card{background:#151515;border-radius:18px;padding:16px;margin:14px;border:1px solid #2a2a2a}
-.white{background:#f4f4f4;color:#000}
-.btn{width:100%;padding:13px;border-radius:14px;border:0;background:#fff;color:#000;font-weight:800;margin-top:10px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px}
-.tile{background:#151515;border:1px solid #2a2a2a;border-radius:15px;padding:14px;text-align:center;font-size:12px}
-.tile b{font-size:24px;display:block;margin-bottom:6px}
-.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;background:#070707;border-top:1px solid #333;display:flex;justify-content:space-around;padding:10px 0}
-.bottom button{background:none;border:0;color:#aaa;font-size:11px}
-.bottom button.active{color:#fff}
-.avatar{width:78px;height:78px;border-radius:50%;background:#ddd;margin-right:15px}
-.row{display:flex;align-items:center}
-.kpis{display:flex;gap:8px}
-.kpis div{flex:1;text-align:center;background:#fff;color:#000;border-radius:12px;padding:12px}
-.progress{height:8px;background:#333;border-radius:20px;overflow:hidden;margin-top:10px}
-.progress div{height:100%;background:#fff;width:75%}
-.item{display:flex;justify-content:space-between;align-items:center;background:#151515;margin:12px 14px;padding:14px;border-radius:16px;border:1px solid #2c2c2c}
-.search{margin:14px;padding:13px;border-radius:14px;background:#181818;border:1px solid #333;color:#fff;width:calc(100% - 28px)}
-.video{height:150px;border-radius:18px;background:linear-gradient(135deg,#333,#000);display:flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:10px}
-.msg{max-width:80%;padding:12px;border-radius:16px;margin:12px 14px;background:#171717}
-.me{margin-left:auto;background:#fff;color:#000}
-.input{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);max-width:430px;width:100%;padding:10px;background:#050505;display:flex;gap:8px}
-.input input{flex:1;background:#181818;border:1px solid #333;border-radius:20px;color:#fff;padding:13px}
-.input button{width:45px;border-radius:50%;border:0;background:#fff}
-.splash{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#000}
-.splash .logo{font-size:58px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team DM Jiu-Jítsu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..0,800;1,300..0,800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-main: #0a0a0c;
+      --bg-card: #141417;
+      --bg-card-accent: #ffffff;
+      --text-main: #ffffff;
+      --text-muted: #8e8e93;
+      --text-dark: #0a0a0c;
+      --accent: #d4af37; /* Toque dourado sutil para campeonatos/faixas */
+      --border-color: #232326;
+      --border-radius-lg: 16px;
+      --border-radius-md: 12px;
+      --font-family: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.2s ease-in-out;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-family);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #000;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Container do App Emulando Mobile */
+    .app {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      background-color: var(--bg-main);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    }
+
+    /* Telas */
+    .screen {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      min-height: 100vh;
+      padding-bottom: 100px; /* Espaço para a navegação fixa */
+      animation: fadeIn 0.3s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cabeçalhos */
+    .header {
+      padding: 24px 20px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(10,10,12,1) 60%, rgba(10,10,12,0) 100%);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-back-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 800;
+      font-style: italic;
+      line-height: 0.85;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      font-size: 12px;
+      letter-spacing: 4px;
+      font-weight: 500;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Cards e Componentes de UI */
+    .card {
+      background-color: var(--bg-card);
+      border-radius: var(--border-radius-lg);
+      padding: 20px;
+      margin: 10px 16px;
+      border: 1px solid var(--border-color);
+    }
+
+    .card.accent {
+      background-color: var(--bg-card-accent);
+      color: var(--text-dark);
+      border: none;
+    }
+
+    .card h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+    .card h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 8px; }
+    .card.accent h3 { color: #666; }
+    .card p { font-size: 14px; opacity: 0.9; }
+
+    /* Botões */
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--border-radius-md);
+      border: none;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary { background-color: var(--text-main); color: var(--text-dark); }
+    .btn-primary:active { transform: scale(0.98); opacity: 0.9; }
+    .btn-secondary { background-color: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); }
+    .btn-outline { background-color: transparent; color: var(--text-dark); border: 1px solid var(--text-dark); }
+    
+    .card .btn { margin-top: 16px; }
+
+    /* Grid de Atalhos (Menu Home) */
+    .grid-menu {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 16px;
+    }
+
+    .tile {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 16px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tile:active { transform: scale(0.95); background-color: #1c1c21; }
+    .tile-icon { font-size: 26px; display: block; margin-bottom: 8px; }
+    .tile-label { font-size: 12px; font-weight: 600; color: #dfdfe5; }
+
+    /* Listas e Itens Individuais */
+    .list-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--bg-card);
+      margin: 8px 16px;
+      padding: 16px;
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .list-item-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+    .list-item-info p { font-size: 13px; color: var(--text-muted); }
+    .list-item .btn { width: auto; padding: 8px 16px; font-size: 13px; margin: 0; }
+
+    /* Perfil do Aluno */
+    .profile-row { display: flex; align-items: center; gap: 16px; }
+    .avatar { width: 64px; height: 64px; border-radius: 50%; background: #2a2a30; border: 2px solid var(--accent); }
+    
+    .kpis { display: flex; gap: 10px; margin-top: 12px; }
+    .kpis-box { flex: 1; text-align: center; background: #f2f2f7; padding: 12px 8px; border-radius: var(--border-radius-md); }
+    .kpis-box b { font-size: 20px; font-weight: 800; display: block; color: var(--text-dark); }
+    .kpis-box span { font-size: 11px; color: #555; font-weight: 500; }
+
+    .progress-bar-container { height: 6px; background: #e5e5ea; border-radius: 10px; margin: 12px 0 6px; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--text-dark); width: 75%; border-radius: 10px; }
+
+    /* Mídia / Vídeos */
+    .search-bar {
+      margin: 10px 16px 16px;
+      padding: 14px 16px;
+      border-radius: var(--border-radius-md);
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: calc(100% - 32px);
+      font-size: 14px;
+    }
+    .search-bar:focus { outline: 1px solid var(--text-muted); }
+
+    .video-thumbnail {
+      height: 160px;
+      border-radius: var(--border-radius-md);
+      background: linear-gradient(135deg, #2c2c35, #111115);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+    }
+
+    /* Chat */
+    .chat-container { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+    .msg { max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.4; background-color: var(--bg-card); border: 1px solid var(--border-color); }
+    .msg-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; display: block; font-weight: 600; }
+    .msg.me { margin-left: auto; background-color: var(--text-main); color: var(--text-dark); border: none; }
+    .msg.me .msg-meta { color: #555; }
+
+    .chat-input-area {
+      position: fixed;
+      bottom: 74px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 430px;
+      width: 100%;
+      padding: 12px 16px;
+      background-color: var(--bg-main);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      gap: 10px;
+      z-index: 9;
+    }
+    .chat-input-area input { flex: 1; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 24px; color: #fff; padding: 12px 18px; font-size: 14px; }
+    .chat-input-area input:focus { outline: none; border-color: var(--text-muted); }
+    .chat-input-area button { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--text-main); color: var(--text-dark); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+    /* Tela de Splash */
+    .splash { justify-content: center; align-items: center; text-align: center; padding: 40px; }
+    .splash .logo { font-size: 48px; margin-bottom: 12px; }
+    .splash p { font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 40px; }
+
+    /* Barra de Navegação Inferior Fixa */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 430px;
+      width: 100%;
+      background-color: rgba(10, 10, 12, 0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px));
+      z-index: 100;
+    }
+
+    .bottom-nav button {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      width: 20%;
+      transition: var(--transition);
+    }
+
+    .bottom-nav button .nav-icon { font-size: 20px; }
+    .bottom-nav button.active { color: var(--text-main); }
+  </style>
 </head>
 <body>
 
 <div class="app">
 
-<section id="splash" class="screen splash active">
-  <div class="logo">TEAM<br>DM<br><span>JIU-JÍTSU</span></div>
-  <p style="margin:25px">DISCIPLINA • FOCO • EVOLUÇÃO</p>
-  <button class="btn" style="width:80%" onclick="show('home')">Entrar no App</button>
-</section>
-
-<section id="home" class="screen">
-  <div class="header">
+  <section id="splash" class="screen active">
     <div class="logo">TEAM<br>DM<br><span>JIU-JÍTSU</span></div>
-    <div>🔔 👤</div>
-  </div>
+    <p>DISCIPLINA • FOCO • EVOLUÇÃO</p>
+    <button class="btn btn-primary" style="width: 85%;" onclick="navigateTo('home')">Entrar no App</button>
+  </section>
 
-  <div class="card white">
-    <h3>Próximo treino</h3>
-    <h2>Treino de Competição</h2>
-    <p>Hoje • 19:00</p>
-    <button class="btn" onclick="show('aluno')">Ver detalhes</button>
-  </div>
+  <section id="home" class="screen">
+    <header class="header">
+      <div class="logo">TEAM<br>DM<br><span>JIU-JÍTSU</span></div>
+      <div class="header-actions"><span>🔔</span><span>👤</span></div>
+    </header>
 
-  <div class="grid">
-    <div class="tile" onclick="show('aluno')"><b>🥋</b>Aluno</div>
-    <div class="tile"><b>🏋️</b>Treinos</div>
-    <div class="tile" onclick="show('tecnicas')"><b>🎓</b>Técnicas</div>
-    <div class="tile"><b>📅</b>Agenda</div>
-    <div class="tile" onclick="show('ranking')"><b>🏆</b>Ranking</div>
-    <div class="tile" onclick="show('financeiro')"><b>💰</b>Financeiro</div>
-    <div class="tile" onclick="show('competicao')"><b>🥇</b>Competição</div>
-    <div class="tile" onclick="show('comunicados')"><b>📢</b>Comunicados</div>
-    <div class="tile" onclick="show('loja')"><b>🛒</b>Loja</div>
-  </div>
-
-  <div class="card">
-    <h2>Rumo à excelência</h2>
-    <p>A disciplina de hoje é o resultado de amanhã.</p>
-  </div>
-</section>
-
-<section id="aluno" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Área do Aluno</h3><span>🔔</span></div>
-
-  <div class="card row">
-    <div class="avatar"></div>
-    <div>
-      <h2>Carlos Eduardo</h2>
-      <p>Faixa Preta 2º Grau</p>
-      <small>Membro desde 2020</small>
+    <div class="card accent">
+      <h3>Próximo treino</h3>
+      <h2>Treino de Competição</h2>
+      <p>Hoje • 19:00</p>
+      <button class="btn btn-outline" onclick="navigateTo('aluno')">Ver detalhes</button>
     </div>
-  </div>
 
-  <div class="card white">
-    <h3>Meu desempenho</h3><br>
-    <div class="kpis">
-      <div><b>24</b><br>Aulas mês</div>
-      <div><b>96%</b><br>Frequência</div>
-      <div><b>87</b><br>Treinos</div>
+    <nav class="grid-menu">
+      <div class="tile" onclick="navigateTo('aluno')"><span class="tile-icon">🥋</span><span class="tile-label">Aluno</span></div>
+      <div class="tile" onclick="navigateTo('comunicados')"><span class="tile-icon">🏋️</span><span class="tile-label">Treinos</span></div>
+      <div class="tile" onclick="navigateTo('tecnicas')"><span class="tile-icon">🎓</span><span class="tile-label">Técnicas</span></div>
+      <div class="tile" onclick="navigateTo('comunicados')"><span class="tile-icon">📅</span><span class="tile-label">Agenda</span></div>
+      <div class="tile" onclick="navigateTo('ranking')"><span class="tile-icon">🏆</span><span class="tile-label">Ranking</span></div>
+      <div class="tile" onclick="navigateTo('financeiro')"><span class="tile-icon">💰</span><span class="tile-label">Financeiro</span></div>
+      <div class="tile" onclick="navigateTo('competicao')"><span class="tile-icon">🥇</span><span class="tile-label">Competição</span></div>
+      <div class="tile" onclick="navigateTo('comunicados')"><span class="tile-icon">📢</span><span class="tile-label">Avisos</span></div>
+      <div class="tile" onclick="navigateTo('loja')"><span class="tile-icon">🛒</span><span class="tile-label">Loja</span></div>
+    </nav>
+
+    <div class="card">
+      <h2>Rumo à excelência</h2>
+      <p style="color: var(--text-muted); margin-top: 4px;">A disciplina de hoje é o resultado do seu amanhã nos tatames.</p>
     </div>
-  </div>
+  </section>
 
-  <div class="card white">
-    <h3>Graduação</h3>
-    <p>Faixa Preta 2º Grau</p>
-    <div class="progress"><div></div></div>
-    <small>Próxima graduação: 75%</small>
-  </div>
+  <section id="aluno" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Área do Aluno</h3>
+      <div class="header-actions"><span>🔔</span></div>
+    </header>
 
-  <div class="item"><span>Treino de Competição</span><b>Hoje</b></div>
-  <div class="item"><span>Técnico / Posicional</span><b>Terça</b></div>
-</section>
+    <div class="card profile-row">
+      <div class="avatar"></div>
+      <div>
+        <h2 style="font-size: 18px;">Carlos Eduardo</h2>
+        <p style="color: var(--accent); font-weight: 600; font-size: 13px;">Faixa Preta 2º Grau</p>
+        <p style="color: var(--text-muted); font-size: 11px; margin-top: 2px;">Membro desde 2020</p>
+      </div>
+    </div>
 
-<section id="tecnicas" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Biblioteca de Técnicas</h3><span></span></div>
-  <input class="search" placeholder="Buscar técnica...">
+    <div class="card accent">
+      <h3>Meu desempenho</h3>
+      <div class="kpis">
+        <div class="kpis-box"><b>24</b><span>Aulas/mês</span></div>
+        <div class="kpis-box"><b>96%</b><span>Frequência</span></div>
+        <div class="kpis-box"><b>87</b><span>Total</span></div>
+      </div>
+    </div>
 
-  <div class="card">
-    <div class="video">▶</div>
-    <h3>Raspagem da Guarda Aranha</h3>
-    <p>Prof. Diego Machado • Intermediário</p>
-    <small>08:45</small>
-  </div>
+    <div class="card accent">
+      <h3>Graduação</h3>
+      <p style="font-weight: 700;">Próximo Grau / Faixa</p>
+      <div class="progress-bar-container"><div class="progress-bar"></div></div>
+      <span style="font-size: 12px; color: #555; font-weight: 600;">Progresso: 75%</span>
+    </div>
 
-  <div class="card">
-    <div class="video">▶</div>
-    <h3>Passagem de Guarda Laço</h3>
-    <p>Prof. Leandro Silva • Avançado</p>
-    <small>11:23</small>
-  </div>
-</section>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Treino de Competição</h3><p>Foco em Sparring</p></div>
+      <span style="font-size: 13px; font-weight: 700; color: var(--accent)">Hoje</span>
+    </div>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Técnico / Posicional</h3><p>Fundamentos Drills</p></div>
+      <span style="font-size: 13px; color: var(--text-muted)">Terça</span>
+    </div>
+  </section>
 
-<section id="competicao" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Competição</h3><span></span></div>
+  <section id="tecnicas" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Biblioteca</h3>
+      <div></div>
+    </header>
+    <input type="text" class="search-bar" placeholder="Buscar técnica ou posição...">
 
-  <div class="item">
-    <div><h3>Open Extreme</h3><p>São Paulo - SP</p></div>
-    <button>Inscrever-se</button>
-  </div>
-  <div class="item">
-    <div><h3>Copa Prime de Jiu-Jítsu</h3><p>Curitiba - PR</p></div>
-    <button>Inscrever-se</button>
-  </div>
-  <div class="item">
-    <div><h3>Sul Brasileiro</h3><p>Porto Alegre - RS</p></div>
-    <button>Inscrever-se</button>
-  </div>
-</section>
+    <div class="card">
+      <div class="video-thumbnail">▶</div>
+      <h3 style="margin-bottom: 4px; color: var(--text-main); font-size: 16px;">Raspagem da Guarda Aranha</h3>
+      <p style="color: var(--text-muted); font-size: 13px;">Prof. Diego Machado • Intermediário</p>
+    </div>
 
-<section id="ranking" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Ranking da Equipe</h3><span></span></div>
+    <div class="card">
+      <div class="video-thumbnail">▶</div>
+      <h3 style="margin-bottom: 4px; color: var(--text-main); font-size: 16px;">Passagem de Guarda Laço</h3>
+      <p style="color: var(--text-muted); font-size: 13px;">Prof. Leandro Silva • Avançado</p>
+    </div>
+  </section>
 
-  <div class="card white" style="text-align:center">
-    <h2>🏆 Carlos Eduardo</h2>
-    <p>1º Lugar • 1520 pts</p>
-  </div>
+  <section id="competicao" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Campeonatos</h3>
+      <div></div>
+    </header>
 
-  <div class="item"><span>2º Rafael S.</span><b>1250 pts</b></div>
-  <div class="item"><span>3º Gabriel M.</span><b>1180 pts</b></div>
-  <div class="item"><span>4º Tiago L.</span><b>1050 pts</b></div>
-  <div class="item"><span>5º Lucas P.</span><b>980 pts</b></div>
-</section>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Open Extreme</h3><p>São Paulo - SP</p></div>
+      <button class="btn btn-primary">Inscrição</button>
+    </div>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Copa Prime de Jiu-Jítsu</h3><p>Curitiba - PR</p></div>
+      <button class="btn btn-primary">Inscrição</button>
+    </div>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Sul Brasileiro</h3><p>Porto Alegre - RS</p></div>
+      <button class="btn btn-primary">Inscrição</button>
+    </div>
+  </section>
 
-<section id="financeiro" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Financeiro</h3><span></span></div>
+  <section id="ranking" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Ranking da Equipe</h3>
+      <div></div>
+    </header>
 
-  <div class="card white">
-    <h3>Resumo do mês</h3><br>
-    <p>Receitas: <b>R$ 28.650,00</b></p>
-    <p>Despesas: <b>R$ 12.350,00</b></p>
-    <p>Saldo: <b>R$ 16.300,00</b></p>
-  </div>
+    <div class="card accent" style="text-align: center;">
+      <h3 style="color: var(--accent);">Líder do Ranking 🥇</h3>
+      <h2 style="font-size: 24px;">Carlos Eduardo</h2>
+      <p style="font-weight: 700; margin-top: 4px;">1.520 pts</p>
+    </div>
 
-  <div class="item"><span>Mensalidades</span><b>+ R$ 9.850</b></div>
-  <div class="item"><span>Eventos</span><b>+ R$ 4.200</b></div>
-  <div class="item"><span>Pagamento Professor</span><b>- R$ 3.500</b></div>
-  <div class="item"><span>Aluguel</span><b>- R$ 2.200</b></div>
-</section>
+    <div class="list-item"><div class="list-item-info"><h3>2º Rafael S.</h3></div><strong>1.250 pts</strong></div>
+    <div class="list-item"><div class="list-item-info"><h3>3º Gabriel M.</h3></div><strong>1.180 pts</strong></div>
+    <div class="list-item"><div class="list-item-info"><h3>4º Tiago L.</h3></div><strong>1.050 pts</strong></div>
+  </section>
 
-<section id="comunicados" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Comunicados</h3><span></span></div>
+  <section id="financeiro" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Painel Financeiro</h3>
+      <div></div>
+    </header>
 
-  <div class="card white">
-    <h3>Aviso</h3>
-    <h2>Treino de Competição</h2>
-    <p>Hoje teremos treino de competição às 19h. Contamos com todos!</p>
-  </div>
+    <div class="card accent">
+      <h3>Fluxo de Caixa (Mês)</h3>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px;">
+        <p style="display: flex; justify-content: space-between;">Receitas: <span style="color: green; font-weight: 700;">R$ 28.650,00</span></p>
+        <p style="display: flex; justify-content: space-between;">Despesas: <span style="color: red; font-weight: 700;">R$ 12.350,00</span></p>
+        <hr style="border: 0; border-top: 1px solid #ddd; margin: 6px 0;">
+        <p style="display: flex; justify-content: space-between; font-size: 16px; font-weight: 800;">Saldo Líquido: <span>R$ 16.300,00</span></p>
+      </div>
+    </div>
 
-  <div class="card white">
-    <h3>Evento</h3>
-    <h2>Open Extreme</h2>
-    <p>Inscrições abertas para o próximo campeonato.</p>
-  </div>
+    <div class="list-item"><div class="list-item-info"><h3>Mensalidades</h3><p>Entradas App</p></div><span style="color: green; font-weight: 700;">+ R$ 9.850</span></div>
+    <div class="list-item"><div class="list-item-info"><h3>Aluguel do Tatame</h3><p>Despesa Fixa</p></div><span style="color: red; font-weight: 700;">- R$ 2.200</span></div>
+  </section>
 
-  <div class="card white">
-    <h3>Enquete</h3>
-    <p>Qual faixa você quer focar esse ano?</p>
-  </div>
-</section>
+  <section id="comunicados" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Mural de Comunicados</h3>
+      <div></div>
+    </header>
 
-<section id="chat" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Chat da Equipe</h3><span></span></div>
+    <div class="card">
+      <h3 style="color: var(--accent)">⚠️ Aviso Importante</h3>
+      <h2 style="font-size: 18px; margin: 4px 0 8px;">Treino de Competição</h2>
+      <p style="color: var(--text-muted)">Hoje teremos treino direcionado com foco em regras IBJJF às 19h. Presença obrigatória dos atletas inscritos.</p>
+    </div>
+  </section>
 
-  <div class="msg">Prof. Diego: Bom dia, equipe! Disciplina hoje, vitória sempre!</div>
-  <div class="msg me">Vamos com tudo! OSS 👊</div>
-  <div class="msg">Prof. Leandro: Não esqueçam do alongamento antes do treino.</div>
+  <section id="chat" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Chat da Equipe</h3>
+      <div></div>
+    </header>
 
-  <div class="input">
-    <input placeholder="Digite sua mensagem...">
-    <button>➤</button>
-  </div>
-</section>
+    <div class="chat-container">
+      <div class="msg">
+        <span class="msg-meta">Prof. Diego</span>
+        Bom dia, equipe! Disciplina hoje, vitória sempre! OSS 👊
+      </div>
+      <div class="msg me">
+        <span class="msg-meta">Você</span>
+        Estarei presente hoje à noite com certeza!
+      </div>
+    </div>
 
-<section id="loja" class="screen">
-  <div class="header"><button onclick="show('home')">←</button><h3>Loja Team DM</h3><span></span></div>
+    <div class="chat-input-area">
+      <input type="text" placeholder="Escreva sua mensagem...">
+      <button aria-label="Enviar mensagem">➤</button>
+    </div>
+  </section>
 
-  <div class="item"><span>Kimono Team DM Gold</span><b>R$ 450</b></div>
-  <div class="item"><span>Rashguard Team DM</span><b>R$ 150</b></div>
-  <div class="item"><span>Squeeze Team DM</span><b>R$ 59,90</b></div>
-  <div class="item"><span>Mochila Team DM</span><b>R$ 199,90</b></div>
-</section>
+  <section id="loja" class="screen">
+    <header class="header">
+      <button class="header-back-btn" onclick="navigateTo('home')">←</button>
+      <h3>Loja Oficial</h3>
+      <div></div>
+    </header>
 
-</div>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Kimono Gold Wear</h3><p>Trançado Leve</p></div>
+      <button class="btn btn-secondary">R$ 450</button>
+    </div>
+    <div class="list-item">
+      <div class="list-item-info"><h3>Rashguard Team DM</h3><p>Proteção UV</p></div>
+      <button class="btn btn-secondary">R$ 150</button>
+    </div>
+  </section>
 
-<div class="bottom">
-  <button class="active" onclick="show('home',this)">Início</button>
-  <button onclick="show('aluno',this)">Alunos</button>
-  <button onclick="show('tecnicas',this)">Treinos</button>
-  <button onclick="show('chat',this)">Chat</button>
-  <button onclick="show('loja',this)">Mais</button>
+  <nav class="bottom-nav" id="main-nav" style="display: none;">
+    <button onclick="navigateTo('home', this)" class="active"><span class="nav-icon">🏠</span><span>Início</span></button>
+    <button onclick="navigateTo('aluno', this)"><span class="nav-icon">🥋</span><span>Perfil</span></button>
+    <button onclick="navigateTo('tecnicas', this)"><span class="nav-icon">🎓</span><span>Técnicas</span></button>
+    <button onclick="navigateTo('chat', this)"><span class="nav-icon">💬</span><span>Chat</span></button>
+    <button onclick="navigateTo('loja', this)"><span class="nav-icon">🛒</span><span>Loja</span></button>
+  </nav>
+
 </div>
 
 <script>
-function show(id,btn){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+  function navigateTo(screenId, navButton) {
+    // Controla visibilidade das telas
+    document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
+    
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+      targetScreen.classList.add('active');
+    }
 
-  if(btn){
-    document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+    // Gerencia o estado da barra de navegação inferior
+    const bottomNav = document.getElementById('main-nav');
+    if (screenId === 'splash') {
+      bottomNav.style.display = 'none';
+    } else {
+      bottomNav.style.display = 'flex';
+    }
+
+    // Se a navegação veio da própria barra inferior, atualiza os estados visuais dos botões
+    if (navButton) {
+      document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+      navButton.classList.add('active');
+    } else {
+      // Sincroniza o botão ativo caso o link venha de dentro das páginas/cards
+      document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
+      const mapping = { home: 0, aluno: 1, tecnicas: 2, chat: 3, loja: 4 };
+      if (mapping[screenId] !== undefined) {
+        document.querySelectorAll('.bottom-nav button')[mapping[screenId]].classList.add('active');
+      }
+    }
+    
+    // Rola para o topo automaticamente ao mudar de tela
+    window.scrollTo({ top: 0 });
   }
-}
 </script>
 
 </body>
