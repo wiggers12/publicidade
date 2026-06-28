@@ -6,20 +6,23 @@
 <title>Júliane Wiggers Nutricionista</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
-body{background:#050705;color:#fff}
-.app{max-width:430px;margin:auto;min-height:100vh;background:#070907;padding-bottom:80px}
-.header{padding:22px;background:linear-gradient(135deg,#0b0b0b,#1b2b05)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#050705;color:white}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#070907;padding-bottom:85px}
+.header{padding:22px;background:linear-gradient(135deg,#050505,#1c3005)}
 .logo{font-size:28px;font-weight:900;color:#a6ff00}
-.logo span{color:#fff}
-.card{background:#141714;margin:15px;border-radius:20px;padding:18px;box-shadow:0 0 20px #000}
+.logo span{color:white}
+.lang{margin-top:15px;display:flex;gap:8px}
+.lang button{flex:1;padding:10px;border:1px solid #a6ff00;background:#111;color:white;border-radius:12px}
+.lang button.active{background:#a6ff00;color:#111;font-weight:bold}
+.card{background:#141714;margin:15px;border-radius:22px;padding:18px;box-shadow:0 0 20px #000}
 .green{background:linear-gradient(135deg,#a6ff00,#78c900);color:#111}
 .btn{background:#a6ff00;color:#111;border:none;border-radius:14px;padding:14px;width:100%;font-weight:800;margin-top:12px}
-.row{display:flex;gap:10px}
+.row{display:flex;gap:10px;padding:0 15px}
 .box{flex:1;background:#1b1e1b;border-radius:15px;padding:15px;text-align:center}
 .box strong{color:#a6ff00;font-size:22px}
 .menu{display:flex;overflow:auto;gap:10px;padding:10px 15px}
-.menu button{background:#1b1e1b;color:#fff;border:1px solid #333;padding:10px 15px;border-radius:20px;white-space:nowrap}
+.menu button{background:#1b1e1b;color:white;border:1px solid #333;padding:10px 15px;border-radius:20px}
 .menu button.active{background:#a6ff00;color:#111}
 .item{display:flex;gap:12px;background:#181b18;margin:12px 15px;padding:12px;border-radius:18px}
 .item img{width:80px;height:80px;border-radius:15px;object-fit:cover}
@@ -29,15 +32,13 @@ body{background:#050705;color:#fff}
 .bottom button.active{color:#a6ff00}
 .screen{display:none}
 .screen.active{display:block}
-.chat{padding:15px}
-.msg{max-width:80%;padding:12px;border-radius:16px;margin:10px 0}
+.msg{max-width:80%;padding:12px;border-radius:16px;margin:10px 15px}
 .left{background:#1c1c1c}
 .right{background:#a6ff00;color:#111;margin-left:auto}
 .input{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);max-width:430px;width:100%;display:flex;gap:8px;background:#080808;padding:10px}
-.input input{flex:1;padding:14px;border-radius:20px;border:none;background:#222;color:#fff}
+.input input{flex:1;padding:14px;border-radius:20px;border:none;background:#222;color:white}
 .input button{width:50px;border:none;border-radius:50%;background:#a6ff00;font-weight:bold}
-.progress{height:180px;background:linear-gradient(#111,#222);border-radius:20px;padding:15px}
-.plan{border:1px solid #a6ff00;border-radius:20px;padding:18px}
+.plan{border:1px solid #a6ff00}
 </style>
 </head>
 
@@ -45,55 +46,58 @@ body{background:#050705;color:#fff}
 
 <div class="app">
 
-<!-- INÍCIO -->
 <section id="home" class="screen active">
   <div class="header">
     <div class="logo">JW <span>Júliane Wiggers</span></div>
-    <p>Nutricionista esportiva</p>
+    <p data-i18n="subtitle">Nutricionista esportiva</p>
+
+    <div class="lang">
+      <button onclick="setLang('pt',this)" class="active">🇧🇷 PT</button>
+      <button onclick="setLang('en',this)">🇺🇸 EN</button>
+      <button onclick="setLang('fr',this)">🇫🇷 FR</button>
+    </div>
   </div>
 
   <div class="card green">
-    <h2>Olá, atleta! 💪</h2>
-    <p>Seu plano alimentar de performance está pronto.</p>
-    <button class="btn" onclick="show('plano')">Ver plano alimentar</button>
+    <h2 data-i18n="hello">Olá, atleta! 💪</h2>
+    <p data-i18n="ready">Seu plano alimentar de performance está pronto.</p>
+    <button class="btn" onclick="show('plano')" data-i18n="seePlan">Ver plano alimentar</button>
   </div>
 
   <div class="card">
-    <h3>Próxima refeição</h3>
-    <h2>ALMOÇO</h2>
-    <p>Frango grelhado, arroz integral, batata doce e brócolis</p>
-    <p class="price">Em 2h 15min</p>
+    <h3 data-i18n="nextMeal">Próxima refeição</h3>
+    <h2 data-i18n="lunch">ALMOÇO</h2>
+    <p data-i18n="mealText">Frango grelhado, arroz integral, batata doce e brócolis</p>
+    <p class="price" data-i18n="time">Em 2h 15min</p>
   </div>
 
-  <div class="row" style="padding:0 15px">
-    <div class="box"><strong>5/5</strong><br>Refeições</div>
-    <div class="box"><strong>2,2L</strong><br>Água</div>
-    <div class="box"><strong>125g</strong><br>Proteína</div>
+  <div class="row">
+    <div class="box"><strong>5/5</strong><br><span data-i18n="meals">Refeições</span></div>
+    <div class="box"><strong>2,2L</strong><br><span data-i18n="water">Água</span></div>
+    <div class="box"><strong>125g</strong><br><span data-i18n="protein">Proteína</span></div>
   </div>
 
   <div class="card">
-    <h3>Suplementação inteligente</h3>
-    <p>Veja quais suplementos podem potencializar seus resultados.</p>
-    <button class="btn">Ver dicas</button>
+    <h3 data-i18n="supplement">Suplementação inteligente</h3>
+    <p data-i18n="supplementText">Veja quais suplementos podem potencializar seus resultados.</p>
+    <button class="btn" data-i18n="seeTips">Ver dicas</button>
   </div>
 </section>
 
-<!-- PLANO -->
 <section id="plano" class="screen">
-  <div class="header"><h2>Plano Alimentar</h2></div>
+  <div class="header"><h2 data-i18n="nutritionPlan">Plano Alimentar</h2></div>
 
   <div class="menu">
-    <button class="active">Dia 1</button>
-    <button>Dia 2</button>
-    <button>Dia 3</button>
-    <button>Dia 4</button>
+    <button class="active" data-i18n="day1">Dia 1</button>
+    <button data-i18n="day2">Dia 2</button>
+    <button data-i18n="day3">Dia 3</button>
   </div>
 
   <div class="item">
     <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=300">
     <div>
-      <h3>Café da manhã</h3>
-      <p>Omelete de claras com aveia e banana</p>
+      <h3 data-i18n="breakfast">Café da manhã</h3>
+      <p data-i18n="breakfastText">Omelete de claras com aveia e banana</p>
       <p class="price">380 kcal</p>
     </div>
   </div>
@@ -101,8 +105,8 @@ body{background:#050705;color:#fff}
   <div class="item">
     <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300">
     <div>
-      <h3>Almoço</h3>
-      <p>Frango grelhado, arroz integral e legumes</p>
+      <h3 data-i18n="lunch2">Almoço</h3>
+      <p data-i18n="lunchText">Frango grelhado, arroz integral e legumes</p>
       <p class="price">550 kcal</p>
     </div>
   </div>
@@ -110,57 +114,51 @@ body{background:#050705;color:#fff}
   <div class="item">
     <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300">
     <div>
-      <h3>Shake proteico</h3>
-      <p>Pasta de amendoim, whey e banana</p>
+      <h3 data-i18n="shake">Shake proteico</h3>
+      <p data-i18n="shakeText">Pasta de amendoim, whey e banana</p>
       <p class="price">280 kcal</p>
     </div>
   </div>
 </section>
 
-<!-- PROGRESSO -->
 <section id="progresso" class="screen">
-  <div class="header"><h2>Meu Progresso</h2></div>
+  <div class="header"><h2 data-i18n="progress">Meu Progresso</h2></div>
 
-  <div class="card progress">
-    <h3>Evolução do peso</h3>
+  <div class="card">
+    <h3 data-i18n="weightEvolution">Evolução do peso</h3>
     <br>
     <p>90kg ───────●</p>
     <p>86kg ───●────</p>
     <p>82,4kg ●──────</p>
     <br>
-    <p class="price">-2,6kg desde o início</p>
+    <p class="price">-2,6kg</p>
   </div>
 
-  <div class="row" style="padding:0 15px">
-    <div class="box"><strong>82,4</strong><br>Peso</div>
-    <div class="box"><strong>44,2</strong><br>Massa magra</div>
-    <div class="box"><strong>14,8%</strong><br>Gordura</div>
-  </div>
-
-  <div class="card">
-    <button class="btn">Ver relatório completo</button>
+  <div class="row">
+    <div class="box"><strong>82,4</strong><br><span data-i18n="weight">Peso</span></div>
+    <div class="box"><strong>44,2</strong><br><span data-i18n="leanMass">Massa magra</span></div>
+    <div class="box"><strong>14,8%</strong><br><span data-i18n="fat">Gordura</span></div>
   </div>
 </section>
 
-<!-- PAGAMENTO -->
 <section id="pagamento" class="screen">
-  <div class="header"><h2>Planos e Pagamentos</h2></div>
+  <div class="header"><h2 data-i18n="payments">Planos e Pagamentos</h2></div>
 
   <div class="card plan">
-    <h2 class="price">PLANO ATLETA</h2>
-    <p>Acompanhamento completo</p>
+    <h2 class="price" data-i18n="athletePlan">PLANO ATLETA</h2>
+    <p data-i18n="completeFollow">Acompanhamento completo</p>
     <br>
-    <p>✔ Plano alimentar personalizado</p>
-    <p>✔ Ajustes semanais</p>
-    <p>✔ Suporte via chat</p>
-    <p>✔ Avaliação corporal</p>
+    <p data-i18n="p1">✔ Plano alimentar personalizado</p>
+    <p data-i18n="p2">✔ Ajustes semanais</p>
+    <p data-i18n="p3">✔ Suporte via chat</p>
+    <p data-i18n="p4">✔ Avaliação corporal</p>
     <br>
     <h1>R$ 199,90 <small>/mês</small></h1>
-    <button class="btn" onclick="alert('Pagamento simulado via PIX / Cartão')">Assinar agora</button>
+    <button class="btn" onclick="alert('Pagamento fictício realizado com sucesso!')" data-i18n="subscribe">Assinar agora</button>
   </div>
 
   <div class="card">
-    <h3>Formas de pagamento</h3>
+    <h3 data-i18n="paymentMethods">Formas de pagamento</h3>
     <br>
     <p>💠 PIX</p>
     <p>💳 Cartão de crédito</p>
@@ -168,60 +166,235 @@ body{background:#050705;color:#fff}
   </div>
 </section>
 
-<!-- CHAT -->
 <section id="chat" class="screen">
   <div class="header">
-    <h2>Fale com a Júliane</h2>
-    <p>Online agora</p>
+    <h2 data-i18n="talk">Fale com a Júliane</h2>
+    <p data-i18n="online">Online agora</p>
   </div>
 
-  <div class="chat">
-    <div class="msg left">Olá, atleta! Como está sua alimentação hoje?</div>
-    <div class="msg right">Estou seguindo o plano certinho.</div>
-    <div class="msg left">Ótimo! Continue assim que os resultados vão aparecer.</div>
-  </div>
+  <div class="msg left" data-i18n="msg1">Olá, atleta! Como está sua alimentação hoje?</div>
+  <div class="msg right" data-i18n="msg2">Estou seguindo o plano certinho.</div>
+  <div class="msg left" data-i18n="msg3">Ótimo! Continue assim que os resultados vão aparecer.</div>
 
   <div class="input">
-    <input placeholder="Digite sua mensagem...">
+    <input data-i18n-placeholder="typeMsg" placeholder="Digite sua mensagem...">
     <button>➤</button>
   </div>
 </section>
 
-<!-- CONSULTAS -->
 <section id="consultas" class="screen">
-  <div class="header"><h2>Consultas Agendadas</h2></div>
+  <div class="header"><h2 data-i18n="appointments">Consultas Agendadas</h2></div>
 
   <div class="card">
-    <h3>Consulta Online</h3>
-    <p>11 de Junho de 2025</p>
-    <p>Quarta-feira - 10:00</p>
-    <button class="btn">Ver detalhes</button>
-  </div>
-
-  <div class="card">
-    <h3>Nova avaliação corporal</h3>
-    <p>Agende sua próxima consulta com a nutricionista.</p>
-    <button class="btn">Agendar consulta</button>
+    <h3 data-i18n="onlineConsult">Consulta Online</h3>
+    <p>11/06/2025</p>
+    <p data-i18n="hour">Quarta-feira - 10:00</p>
+    <button class="btn" data-i18n="details">Ver detalhes</button>
   </div>
 </section>
 
 </div>
 
 <div class="bottom">
-  <button class="active" onclick="show('home',this)">Início</button>
-  <button onclick="show('plano',this)">Plano</button>
-  <button onclick="show('progresso',this)">Progresso</button>
-  <button onclick="show('pagamento',this)">Pagar</button>
-  <button onclick="show('chat',this)">Chat</button>
+  <button class="active" onclick="show('home',this)" data-i18n="home">Início</button>
+  <button onclick="show('plano',this)" data-i18n="plan">Plano</button>
+  <button onclick="show('progresso',this)" data-i18n="progressMenu">Progresso</button>
+  <button onclick="show('pagamento',this)" data-i18n="pay">Pagar</button>
+  <button onclick="show('chat',this)" data-i18n="chatMenu">Chat</button>
 </div>
 
 <script>
-function show(id,btn){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+const textos = {
+pt:{
+subtitle:"Nutricionista esportiva",
+hello:"Olá, atleta! 💪",
+ready:"Seu plano alimentar de performance está pronto.",
+seePlan:"Ver plano alimentar",
+nextMeal:"Próxima refeição",
+lunch:"ALMOÇO",
+mealText:"Frango grelhado, arroz integral, batata doce e brócolis",
+time:"Em 2h 15min",
+meals:"Refeições",
+water:"Água",
+protein:"Proteína",
+supplement:"Suplementação inteligente",
+supplementText:"Veja quais suplementos podem potencializar seus resultados.",
+seeTips:"Ver dicas",
+nutritionPlan:"Plano Alimentar",
+day1:"Dia 1",
+day2:"Dia 2",
+day3:"Dia 3",
+breakfast:"Café da manhã",
+breakfastText:"Omelete de claras com aveia e banana",
+lunch2:"Almoço",
+lunchText:"Frango grelhado, arroz integral e legumes",
+shake:"Shake proteico",
+shakeText:"Pasta de amendoim, whey e banana",
+progress:"Meu Progresso",
+weightEvolution:"Evolução do peso",
+weight:"Peso",
+leanMass:"Massa magra",
+fat:"Gordura",
+payments:"Planos e Pagamentos",
+athletePlan:"PLANO ATLETA",
+completeFollow:"Acompanhamento completo",
+p1:"✔ Plano alimentar personalizado",
+p2:"✔ Ajustes semanais",
+p3:"✔ Suporte via chat",
+p4:"✔ Avaliação corporal",
+subscribe:"Assinar agora",
+paymentMethods:"Formas de pagamento",
+talk:"Fale com a Júliane",
+online:"Online agora",
+msg1:"Olá, atleta! Como está sua alimentação hoje?",
+msg2:"Estou seguindo o plano certinho.",
+msg3:"Ótimo! Continue assim que os resultados vão aparecer.",
+typeMsg:"Digite sua mensagem...",
+appointments:"Consultas Agendadas",
+onlineConsult:"Consulta Online",
+hour:"Quarta-feira - 10:00",
+details:"Ver detalhes",
+home:"Início",
+plan:"Plano",
+progressMenu:"Progresso",
+pay:"Pagar",
+chatMenu:"Chat"
+},
+en:{
+subtitle:"Sports nutritionist",
+hello:"Hello, athlete! 💪",
+ready:"Your performance meal plan is ready.",
+seePlan:"View nutrition plan",
+nextMeal:"Next meal",
+lunch:"LUNCH",
+mealText:"Grilled chicken, brown rice, sweet potato and broccoli",
+time:"In 2h 15min",
+meals:"Meals",
+water:"Water",
+protein:"Protein",
+supplement:"Smart supplementation",
+supplementText:"See which supplements can boost your results.",
+seeTips:"View tips",
+nutritionPlan:"Nutrition Plan",
+day1:"Day 1",
+day2:"Day 2",
+day3:"Day 3",
+breakfast:"Breakfast",
+breakfastText:"Egg white omelet with oats and banana",
+lunch2:"Lunch",
+lunchText:"Grilled chicken, brown rice and vegetables",
+shake:"Protein shake",
+shakeText:"Peanut butter, whey and banana",
+progress:"My Progress",
+weightEvolution:"Weight evolution",
+weight:"Weight",
+leanMass:"Lean mass",
+fat:"Body fat",
+payments:"Plans and Payments",
+athletePlan:"ATHLETE PLAN",
+completeFollow:"Complete coaching",
+p1:"✔ Personalized meal plan",
+p2:"✔ Weekly adjustments",
+p3:"✔ Chat support",
+p4:"✔ Body assessment",
+subscribe:"Subscribe now",
+paymentMethods:"Payment methods",
+talk:"Talk to Júliane",
+online:"Online now",
+msg1:"Hello, athlete! How is your nutrition today?",
+msg2:"I am following the plan correctly.",
+msg3:"Great! Keep going and results will come.",
+typeMsg:"Type your message...",
+appointments:"Scheduled Appointments",
+onlineConsult:"Online Consultation",
+hour:"Wednesday - 10:00 AM",
+details:"View details",
+home:"Home",
+plan:"Plan",
+progressMenu:"Progress",
+pay:"Pay",
+chatMenu:"Chat"
+},
+fr:{
+subtitle:"Nutritionniste sportive",
+hello:"Bonjour, athlète ! 💪",
+ready:"Votre plan alimentaire de performance est prêt.",
+seePlan:"Voir le plan alimentaire",
+nextMeal:"Prochain repas",
+lunch:"DÉJEUNER",
+mealText:"Poulet grillé, riz complet, patate douce et brocoli",
+time:"Dans 2h 15min",
+meals:"Repas",
+water:"Eau",
+protein:"Protéines",
+supplement:"Supplémentation intelligente",
+supplementText:"Découvrez quels suppléments peuvent améliorer vos résultats.",
+seeTips:"Voir les conseils",
+nutritionPlan:"Plan Alimentaire",
+day1:"Jour 1",
+day2:"Jour 2",
+day3:"Jour 3",
+breakfast:"Petit-déjeuner",
+breakfastText:"Omelette de blancs d’œufs avec avoine et banane",
+lunch2:"Déjeuner",
+lunchText:"Poulet grillé, riz complet et légumes",
+shake:"Shake protéiné",
+shakeText:"Beurre de cacahuète, whey et banane",
+progress:"Mes Progrès",
+weightEvolution:"Évolution du poids",
+weight:"Poids",
+leanMass:"Masse maigre",
+fat:"Graisse",
+payments:"Plans et Paiements",
+athletePlan:"PLAN ATHLÈTE",
+completeFollow:"Accompagnement complet",
+p1:"✔ Plan alimentaire personnalisé",
+p2:"✔ Ajustements hebdomadaires",
+p3:"✔ Support par chat",
+p4:"✔ Évaluation corporelle",
+subscribe:"S’abonner maintenant",
+paymentMethods:"Méthodes de paiement",
+talk:"Parler avec Júliane",
+online:"En ligne maintenant",
+msg1:"Bonjour, athlète ! Comment va votre alimentation aujourd’hui ?",
+msg2:"Je suis correctement le plan.",
+msg3:"Très bien ! Continuez ainsi, les résultats vont arriver.",
+typeMsg:"Écrivez votre message...",
+appointments:"Rendez-vous Planifiés",
+onlineConsult:"Consultation en ligne",
+hour:"Mercredi - 10h00",
+details:"Voir les détails",
+home:"Accueil",
+plan:"Plan",
+progressMenu:"Progrès",
+pay:"Payer",
+chatMenu:"Chat"
+}
+};
 
-  document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
+function setLang(lang,btn){
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const key = el.getAttribute("data-i18n");
+    if(textos[lang][key]) el.innerText = textos[lang][key];
+  });
+
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+    const key = el.getAttribute("data-i18n-placeholder");
+    if(textos[lang][key]) el.placeholder = textos[lang][key];
+  });
+
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+function show(id,btn){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+
+  if(btn){
+    document.querySelectorAll(".bottom button").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+  }
 }
 </script>
 
