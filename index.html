@@ -1,166 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GessoPro 360</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
-    body{background:#f4f6f8;color:#1f2937}
-    header{background:linear-gradient(135deg,#111827,#374151);color:white;padding:45px 20px;text-align:center}
-    header h1{font-size:38px;margin-bottom:10px}
-    header p{font-size:18px;color:#d1d5db}
-    .btn{display:inline-block;margin-top:25px;background:#22c55e;color:white;padding:15px 25px;border-radius:12px;text-decoration:none;font-weight:bold}
-    section{padding:35px 20px;max-width:1100px;margin:auto}
-    h2{font-size:28px;margin-bottom:20px;color:#111827}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-    .card{background:white;border-radius:18px;padding:22px;box-shadow:0 10px 25px #0001}
-    .card h3{margin-bottom:10px;color:#111827}
-    .price{font-size:30px;font-weight:bold;color:#22c55e}
-    input,select,textarea{width:100%;padding:14px;margin:8px 0;border:1px solid #ddd;border-radius:10px}
-    button{background:#111827;color:white;border:0;padding:15px;border-radius:12px;width:100%;font-size:16px;font-weight:bold}
-    .status{padding:8px 12px;border-radius:20px;font-size:13px;display:inline-block;margin-top:10px}
-    .novo{background:#dbeafe;color:#1d4ed8}
-    .orcamento{background:#fef3c7;color:#92400e}
-    .fechado{background:#dcfce7;color:#166534}
-    footer{text-align:center;padding:25px;background:#111827;color:white;margin-top:30px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Júliane Wiggers Nutricionista</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
+body{background:#050705;color:#fff}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#070907;padding-bottom:80px}
+.header{padding:22px;background:linear-gradient(135deg,#0b0b0b,#1b2b05)}
+.logo{font-size:28px;font-weight:900;color:#a6ff00}
+.logo span{color:#fff}
+.card{background:#141714;margin:15px;border-radius:20px;padding:18px;box-shadow:0 0 20px #000}
+.green{background:linear-gradient(135deg,#a6ff00,#78c900);color:#111}
+.btn{background:#a6ff00;color:#111;border:none;border-radius:14px;padding:14px;width:100%;font-weight:800;margin-top:12px}
+.row{display:flex;gap:10px}
+.box{flex:1;background:#1b1e1b;border-radius:15px;padding:15px;text-align:center}
+.box strong{color:#a6ff00;font-size:22px}
+.menu{display:flex;overflow:auto;gap:10px;padding:10px 15px}
+.menu button{background:#1b1e1b;color:#fff;border:1px solid #333;padding:10px 15px;border-radius:20px;white-space:nowrap}
+.menu button.active{background:#a6ff00;color:#111}
+.item{display:flex;gap:12px;background:#181b18;margin:12px 15px;padding:12px;border-radius:18px}
+.item img{width:80px;height:80px;border-radius:15px;object-fit:cover}
+.price{color:#a6ff00;font-weight:bold}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:#111;display:flex;justify-content:space-around;padding:12px 0;border-top:1px solid #333}
+.bottom button{background:none;border:none;color:#aaa;font-size:12px}
+.bottom button.active{color:#a6ff00}
+.screen{display:none}
+.screen.active{display:block}
+.chat{padding:15px}
+.msg{max-width:80%;padding:12px;border-radius:16px;margin:10px 0}
+.left{background:#1c1c1c}
+.right{background:#a6ff00;color:#111;margin-left:auto}
+.input{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);max-width:430px;width:100%;display:flex;gap:8px;background:#080808;padding:10px}
+.input input{flex:1;padding:14px;border-radius:20px;border:none;background:#222;color:#fff}
+.input button{width:50px;border:none;border-radius:50%;background:#a6ff00;font-weight:bold}
+.progress{height:180px;background:linear-gradient(#111,#222);border-radius:20px;padding:15px}
+.plan{border:1px solid #a6ff00;border-radius:20px;padding:18px}
+</style>
 </head>
+
 <body>
 
-<header>
-  <h1>GessoPro 360</h1>
-  <p>Sistema profissional para empresas de gesso, drywall e forro PVC venderem mais todos os dias.</p>
-  <a class="btn" href="https://wa.me/5500000000000">Solicitar orçamento pelo WhatsApp</a>
-</header>
+<div class="app">
 
-<section>
-  <h2>Serviços</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Forro de Gesso</h3>
-      <p>Rebaixamento, acabamento fino, sancas e iluminação embutida.</p>
-    </div>
-    <div class="card">
-      <h3>Drywall</h3>
-      <p>Paredes, divisórias, nichos, painéis e ambientes planejados.</p>
-    </div>
-    <div class="card">
-      <h3>Forro PVC</h3>
-      <p>Instalação rápida, limpa e econômica para residências e comércios.</p>
-    </div>
-    <div class="card">
-      <h3>Reparos</h3>
-      <p>Consertos em teto, trincas, infiltrações e manutenção geral.</p>
-    </div>
+<!-- INÍCIO -->
+<section id="home" class="screen active">
+  <div class="header">
+    <div class="logo">JW <span>Júliane Wiggers</span></div>
+    <p>Nutricionista esportiva</p>
   </div>
-</section>
 
-<section>
-  <h2>Orçamento Rápido</h2>
+  <div class="card green">
+    <h2>Olá, atleta! 💪</h2>
+    <p>Seu plano alimentar de performance está pronto.</p>
+    <button class="btn" onclick="show('plano')">Ver plano alimentar</button>
+  </div>
+
   <div class="card">
-    <input id="nome" placeholder="Nome do cliente">
-    <input id="telefone" placeholder="WhatsApp">
-    <select id="servico">
-      <option>Forro de gesso</option>
-      <option>Drywall</option>
-      <option>Forro PVC</option>
-      <option>Reparo</option>
-    </select>
-    <input id="largura" type="number" placeholder="Largura em metros">
-    <input id="comprimento" type="number" placeholder="Comprimento em metros">
-    <textarea placeholder="Descreva o serviço ou envie fotos pelo WhatsApp"></textarea>
-    <button onclick="calcular()">Calcular orçamento estimado</button>
-    <h3 id="resultado" style="margin-top:20px"></h3>
+    <h3>Próxima refeição</h3>
+    <h2>ALMOÇO</h2>
+    <p>Frango grelhado, arroz integral, batata doce e brócolis</p>
+    <p class="price">Em 2h 15min</p>
+  </div>
+
+  <div class="row" style="padding:0 15px">
+    <div class="box"><strong>5/5</strong><br>Refeições</div>
+    <div class="box"><strong>2,2L</strong><br>Água</div>
+    <div class="box"><strong>125g</strong><br>Proteína</div>
+  </div>
+
+  <div class="card">
+    <h3>Suplementação inteligente</h3>
+    <p>Veja quais suplementos podem potencializar seus resultados.</p>
+    <button class="btn">Ver dicas</button>
   </div>
 </section>
 
-<section>
-  <h2>Painel de Obras</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Cliente: João Silva</h3>
-      <p>Serviço: Forro de gesso - Sala</p>
-      <p>Medida: 18m²</p>
-      <span class="status novo">Novo lead</span>
-    </div>
-    <div class="card">
-      <h3>Cliente: Maria Souza</h3>
-      <p>Serviço: Drywall - Escritório</p>
-      <p>Medida: 32m²</p>
-      <span class="status orcamento">Orçamento enviado</span>
-    </div>
-    <div class="card">
-      <h3>Cliente: Carlos Lima</h3>
-      <p>Serviço: Forro PVC - Banheiro</p>
-      <p>Medida: 9m²</p>
-      <span class="status fechado">Fechado</span>
+<!-- PLANO -->
+<section id="plano" class="screen">
+  <div class="header"><h2>Plano Alimentar</h2></div>
+
+  <div class="menu">
+    <button class="active">Dia 1</button>
+    <button>Dia 2</button>
+    <button>Dia 3</button>
+    <button>Dia 4</button>
+  </div>
+
+  <div class="item">
+    <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=300">
+    <div>
+      <h3>Café da manhã</h3>
+      <p>Omelete de claras com aveia e banana</p>
+      <p class="price">380 kcal</p>
     </div>
   </div>
-</section>
 
-<section>
-  <h2>Dashboard</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Orçamentos no mês</h3>
-      <p class="price">47</p>
+  <div class="item">
+    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=300">
+    <div>
+      <h3>Almoço</h3>
+      <p>Frango grelhado, arroz integral e legumes</p>
+      <p class="price">550 kcal</p>
     </div>
-    <div class="card">
-      <h3>Serviços fechados</h3>
-      <p class="price">18</p>
-    </div>
-    <div class="card">
-      <h3>Faturamento estimado</h3>
-      <p class="price">R$ 36.800</p>
-    </div>
-    <div class="card">
-      <h3>Taxa de fechamento</h3>
-      <p class="price">38%</p>
+  </div>
+
+  <div class="item">
+    <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=300">
+    <div>
+      <h3>Shake proteico</h3>
+      <p>Pasta de amendoim, whey e banana</p>
+      <p class="price">280 kcal</p>
     </div>
   </div>
 </section>
 
-<section>
-  <h2>Antes e Depois</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>Sala com sanca iluminada</h3>
-      <p>Imagem demonstrativa do projeto finalizado.</p>
-    </div>
-    <div class="card">
-      <h3>Drywall comercial</h3>
-      <p>Divisória moderna para escritório.</p>
-    </div>
-    <div class="card">
-      <h3>Forro PVC banheiro</h3>
-      <p>Serviço rápido, limpo e econômico.</p>
-    </div>
+<!-- PROGRESSO -->
+<section id="progresso" class="screen">
+  <div class="header"><h2>Meu Progresso</h2></div>
+
+  <div class="card progress">
+    <h3>Evolução do peso</h3>
+    <br>
+    <p>90kg ───────●</p>
+    <p>86kg ───●────</p>
+    <p>82,4kg ●──────</p>
+    <br>
+    <p class="price">-2,6kg desde o início</p>
+  </div>
+
+  <div class="row" style="padding:0 15px">
+    <div class="box"><strong>82,4</strong><br>Peso</div>
+    <div class="box"><strong>44,2</strong><br>Massa magra</div>
+    <div class="box"><strong>14,8%</strong><br>Gordura</div>
+  </div>
+
+  <div class="card">
+    <button class="btn">Ver relatório completo</button>
   </div>
 </section>
 
-<footer>
-  <p>GessoPro 360 © Sistema para empresas de gesso venderem mais</p>
-</footer>
+<!-- PAGAMENTO -->
+<section id="pagamento" class="screen">
+  <div class="header"><h2>Planos e Pagamentos</h2></div>
+
+  <div class="card plan">
+    <h2 class="price">PLANO ATLETA</h2>
+    <p>Acompanhamento completo</p>
+    <br>
+    <p>✔ Plano alimentar personalizado</p>
+    <p>✔ Ajustes semanais</p>
+    <p>✔ Suporte via chat</p>
+    <p>✔ Avaliação corporal</p>
+    <br>
+    <h1>R$ 199,90 <small>/mês</small></h1>
+    <button class="btn" onclick="alert('Pagamento simulado via PIX / Cartão')">Assinar agora</button>
+  </div>
+
+  <div class="card">
+    <h3>Formas de pagamento</h3>
+    <br>
+    <p>💠 PIX</p>
+    <p>💳 Cartão de crédito</p>
+    <p>🏦 Boleto</p>
+  </div>
+</section>
+
+<!-- CHAT -->
+<section id="chat" class="screen">
+  <div class="header">
+    <h2>Fale com a Júliane</h2>
+    <p>Online agora</p>
+  </div>
+
+  <div class="chat">
+    <div class="msg left">Olá, atleta! Como está sua alimentação hoje?</div>
+    <div class="msg right">Estou seguindo o plano certinho.</div>
+    <div class="msg left">Ótimo! Continue assim que os resultados vão aparecer.</div>
+  </div>
+
+  <div class="input">
+    <input placeholder="Digite sua mensagem...">
+    <button>➤</button>
+  </div>
+</section>
+
+<!-- CONSULTAS -->
+<section id="consultas" class="screen">
+  <div class="header"><h2>Consultas Agendadas</h2></div>
+
+  <div class="card">
+    <h3>Consulta Online</h3>
+    <p>11 de Junho de 2025</p>
+    <p>Quarta-feira - 10:00</p>
+    <button class="btn">Ver detalhes</button>
+  </div>
+
+  <div class="card">
+    <h3>Nova avaliação corporal</h3>
+    <p>Agende sua próxima consulta com a nutricionista.</p>
+    <button class="btn">Agendar consulta</button>
+  </div>
+</section>
+
+</div>
+
+<div class="bottom">
+  <button class="active" onclick="show('home',this)">Início</button>
+  <button onclick="show('plano',this)">Plano</button>
+  <button onclick="show('progresso',this)">Progresso</button>
+  <button onclick="show('pagamento',this)">Pagar</button>
+  <button onclick="show('chat',this)">Chat</button>
+</div>
 
 <script>
-function calcular(){
-  const largura = Number(document.getElementById("largura").value);
-  const comprimento = Number(document.getElementById("comprimento").value);
-  const servico = document.getElementById("servico").value;
-  const m2 = largura * comprimento;
+function show(id,btn){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 
-  let valorM2 = 0;
-
-  if(servico === "Forro de gesso") valorM2 = 95;
-  if(servico === "Drywall") valorM2 = 120;
-  if(servico === "Forro PVC") valorM2 = 75;
-  if(servico === "Reparo") valorM2 = 150;
-
-  const total = m2 * valorM2;
-
-  document.getElementById("resultado").innerHTML =
-    `Área: ${m2.toFixed(2)}m²<br>Orçamento estimado: R$ ${total.toFixed(2)}`;
+  document.querySelectorAll('.bottom button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
 }
 </script>
 
