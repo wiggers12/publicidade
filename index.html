@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Team DM Jiu-Jítsu</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..0,800;1,300..0,800&display=swap" rel="stylesheet">
@@ -16,7 +17,7 @@
       --text-main: #ffffff;
       --text-muted: #8e8e93;
       --text-dark: #0a0a0c;
-      --accent: #d4af37; /* Toque dourado sutil para campeonatos/faixas */
+      --accent: #d4af37; /* Dourado focado em campeonatos/faixas */
       --border-color: #232326;
       --border-radius-lg: 16px;
       --border-radius-md: 12px;
@@ -57,7 +58,7 @@
       flex-direction: column;
       width: 100%;
       min-height: 100vh;
-      padding-bottom: 100px; /* Espaço para a navegação fixa */
+      padding-bottom: 100px;
       animation: fadeIn 0.3s ease;
     }
 
@@ -119,6 +120,97 @@
       gap: 12px;
       font-size: 20px;
       cursor: pointer;
+    }
+
+    /* REFORMULAÇÃO DA TELA DE SPLASH PREMIUM */
+    .splash {
+      position: relative;
+      justify-content: space-between;
+      align-items: center;
+      padding: 60px 24px;
+      min-height: 100vh;
+      background: 
+        linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(10, 10, 12, 0.95) 85%),
+        url('https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=600&auto=format&fit=crop') no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .splash::before {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+    }
+
+    .splash-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: auto;
+      margin-bottom: auto;
+      z-index: 2;
+    }
+
+    .splash .logo {
+      font-size: 54px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 0.8;
+      color: #fff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    .splash .logo span {
+      font-size: 14px;
+      letter-spacing: 7px;
+      color: var(--accent);
+      margin-top: 6px;
+      font-weight: 700;
+    }
+
+    .splash-motto {
+      margin-top: 30px;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #e5e5ea;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px 16px;
+      border-radius: 40px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .splash-footer {
+      width: 100%;
+      z-index: 2;
+      margin-top: auto;
+    }
+
+    .btn-splash {
+      background: linear-gradient(135deg, #ffffff 0%, #e5e5ea 100%);
+      color: var(--text-dark);
+      font-size: 16px;
+      letter-spacing: 1px;
+      padding: 18px;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .btn-splash:active {
+      transform: scale(0.97);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.5);
     }
 
     /* Cards e Componentes de UI */
@@ -263,11 +355,6 @@
     .chat-input-area input:focus { outline: none; border-color: var(--text-muted); }
     .chat-input-area button { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--text-main); color: var(--text-dark); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-    /* Tela de Splash */
-    .splash { justify-content: center; align-items: center; text-align: center; padding: 40px; }
-    .splash .logo { font-size: 48px; margin-bottom: 12px; }
-    .splash p { font-size: 13px; letter-spacing: 3px; color: var(--text-muted); margin-bottom: 40px; }
-
     /* Barra de Navegação Inferior Fixa */
     .bottom-nav {
       position: fixed;
@@ -309,10 +396,19 @@
 
 <div class="app">
 
-  <section id="splash" class="screen active">
-    <div class="logo">TEAM<br>DM<br><span>JIU-JÍTSU</span></div>
-    <p>DISCIPLINA • FOCO • EVOLUÇÃO</p>
-    <button class="btn btn-primary" style="width: 85%;" onclick="navigateTo('home')">Entrar no App</button>
+  <section id="splash" class="screen splash active">
+    <div class="splash-content">
+      <div class="logo">
+        TEAM<br>DM<br>
+        <span>JIU-JÍTSU</span>
+      </div>
+      <div class="splash-motto">DISCIPLINA • FOCO • EVOLUÇÃO</div>
+    </div>
+    <div class="splash-footer">
+      <button class="btn btn-splash" onclick="navigateTo('home')">
+        INICIAR TREINAMENTO →
+      </button>
+    </div>
   </section>
 
   <section id="home" class="screen">
@@ -536,7 +632,6 @@
 
 <script>
   function navigateTo(screenId, navButton) {
-    // Controla visibilidade das telas
     document.querySelectorAll('.screen').forEach(screen => screen.classList.remove('active'));
     
     const targetScreen = document.getElementById(screenId);
@@ -544,7 +639,6 @@
       targetScreen.classList.add('active');
     }
 
-    // Gerencia o estado da barra de navegação inferior
     const bottomNav = document.getElementById('main-nav');
     if (screenId === 'splash') {
       bottomNav.style.display = 'none';
@@ -552,12 +646,10 @@
       bottomNav.style.display = 'flex';
     }
 
-    // Se a navegação veio da própria barra inferior, atualiza os estados visuais dos botões
     if (navButton) {
       document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
       navButton.classList.add('active');
     } else {
-      // Sincroniza o botão ativo caso o link venha de dentro das páginas/cards
       document.querySelectorAll('.bottom-nav button').forEach(btn => btn.classList.remove('active'));
       const mapping = { home: 0, aluno: 1, tecnicas: 2, chat: 3, loja: 4 };
       if (mapping[screenId] !== undefined) {
@@ -565,7 +657,6 @@
       }
     }
     
-    // Rola para o topo automaticamente ao mudar de tela
     window.scrollTo({ top: 0 });
   }
 </script>
