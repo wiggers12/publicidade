@@ -1,391 +1,391 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wiggers Brothers Jiu-Jitsu</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #080808;
-      color: #fff;
-    }
-
-    header {
-      min-height: 100vh;
-      background:
-        linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,.9)),
-        url("https://images.unsplash.com/photo-1555597673-b21d5c935865?q=80&w=1600") center/cover;
-      display: flex;
-      align-items: center;
-      padding: 40px 8%;
-    }
-
-    .hero {
-      max-width: 760px;
-    }
-
-    .logo {
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: #111;
-      border: 3px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 25px;
-      font-size: 42px;
-      font-weight: 900;
-    }
-
-    h1 {
-      font-size: 52px;
-      line-height: 1.1;
-      margin-bottom: 15px;
-    }
-
-    h1 span {
-      color: #d4af37;
-    }
-
-    .subtitle {
-      font-size: 22px;
-      color: #ddd;
-      margin-bottom: 25px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: #ccc;
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .btn {
-      padding: 16px 26px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: .3s;
-    }
-
-    .btn-primary {
-      background: #d4af37;
-      color: #000;
-    }
-
-    .btn-secondary {
-      border: 1px solid #fff;
-      color: #fff;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    section {
-      padding: 80px 8%;
-    }
-
-    .title {
-      text-align: center;
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .desc {
-      text-align: center;
-      color: #aaa;
-      max-width: 720px;
-      margin: 0 auto 50px;
-      line-height: 1.6;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
-
-    .card {
-      background: #121212;
-      padding: 30px;
-      border-radius: 20px;
-      border: 1px solid #222;
-      transition: .3s;
-    }
-
-    .card:hover {
-      border-color: #d4af37;
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      color: #d4af37;
-      margin-bottom: 12px;
-      font-size: 22px;
-    }
-
-    .card p {
-      color: #bbb;
-      line-height: 1.6;
-    }
-
-    .stats {
-      background: #111;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 25px;
-      text-align: center;
-    }
-
-    .stat h2 {
-      color: #d4af37;
-      font-size: 42px;
-    }
-
-    .stat p {
-      color: #aaa;
-      margin-top: 8px;
-    }
-
-    .cta {
-      background: linear-gradient(135deg, #d4af37, #8b6f1d);
-      color: #000;
-      text-align: center;
-      border-radius: 30px;
-      padding: 60px 30px;
-    }
-
-    .cta h2 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .cta p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    .cta a {
-      background: #000;
-      color: #fff;
-      padding: 16px 30px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    footer {
-      padding: 35px 8%;
-      background: #050505;
-      color: #aaa;
-      text-align: center;
-    }
-
-    footer strong {
-      color: #fff;
-    }
-
-    @media (max-width: 700px) {
-      h1 {
-        font-size: 38px;
-      }
-
-      .subtitle {
-        font-size: 19px;
-      }
-
-      header {
-        padding: 30px 6%;
-      }
-
-      section {
-        padding: 60px 6%;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço Taai Botelho - Sistema de Agendamento</title>
+    <!-- Google Fonts & Ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #faf7f5;
+            color: #4a3e3d;
+            line-height: 1.5;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            background: linear-gradient(135deg, #2c1a1d 0%, #4a282e 100%);
+            color: #ffffff;
+            padding: 25px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(74, 40, 46, 0.15);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .header h1 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #f7d6d0;
+        }
+        .header p {
+            font-size: 13px;
+            color: #d1b8b3;
+            margin-top: 4px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .stat-card {
+            background: #ffffff;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-left: 5px solid #c88a8a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .stat-card.green { border-left-color: #48bb78; }
+        .stat-card.purple { border-left-color: #9f7aea; }
+        .stat-card.blue { border-left-color: #4299e1; }
+        
+        .stat-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8c7b79;
+            font-weight: 600;
+        }
+        .stat-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2c1a1d;
+            margin-top: 5px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            margin-bottom: 25px;
+        }
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c1a1d;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f2e9e4;
+            padding-bottom: 10px;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #635250;
+        }
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #e2d7d5;
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            outline: none;
+            background-color: #fdfbfb;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #c88a8a;
+            box-shadow: 0 0 0 3px rgba(200, 138, 138, 0.15);
+            background-color: #ffffff;
+        }
+        .btn {
+            background-color: #c88a8a;
+            color: #ffffff;
+            border: none;
+            padding: 11px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn:hover { background-color: #b57777; }
+        .btn-full { grid-column: 1 / -1; margin-top: 5px; }
+        
+        .table-responsive { overflow-x: auto; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8f1ef;
+            color: #52403e;
+            padding: 12px 14px;
+            font-weight: 600;
+            border-bottom: 2px solid #ebdcd8;
+            white-space: nowrap;
+        }
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #f2e9e4;
+            color: #4a3e3d;
+            vertical-align: middle;
+        }
+        tr:hover { background-color: #fcf8f7; }
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        .badge-pix { background-color: #e6fffa; color: #234e52; }
+        .badge-card { background-color: #ebf8ff; color: #2b6cb0; }
+        .badge-cash { background-color: #f0fff4; color: #276749; }
+        .badge-expense { background-color: #fff5f5; color: #9b2c2c; }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            color: #e53e3e;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 8px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #9c8a88;
+            margin-top: 30px;
+            padding-bottom: 15px;
+        }
+    </style>
 </head>
-
 <body>
 
-  <header>
-    <div class="hero">
-      <div class="logo">WB</div>
-
-      <h1>Wiggers Brothers <span>Jiu-Jitsu</span></h1>
-
-      <div class="subtitle">
-        Academia de Jiu-Jitsu Brasileiro em Cachoeirinha
-      </div>
-
-      <p>
-        Desde 2011 formando alunos através da disciplina, respeito,
-        evolução pessoal e espírito de equipe. Aulas para adultos e crianças,
-        com ambiente familiar, seguro e focado no desenvolvimento de cada aluno.
-      </p>
-
-      <div class="buttons">
-        <a class="btn btn-primary" href="https://wa.me/5551999999999" target="_blank">
-          Marcar Aula Experimental
-        </a>
-
-        <a class="btn btn-secondary" href="https://www.instagram.com/wiggersacademy/" target="_blank">
-          Ver Instagram
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <section>
-    <h2 class="title">Por que treinar na Wiggers Brothers?</h2>
-    <p class="desc">
-      O Jiu-Jitsu vai muito além da luta. Ele desenvolve confiança,
-      disciplina, autocontrole, condicionamento físico e defesa pessoal.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Aulas Adulto</h3>
-        <p>
-          Treinos técnicos e práticos para iniciantes e avançados,
-          com foco em evolução, defesa pessoal e qualidade de vida.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Aulas Infantil</h3>
-        <p>
-          Jiu-Jitsu para crianças com foco em disciplina, respeito,
-          coordenação motora, confiança e socialização.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Aula Experimental</h3>
-        <p>
-          O aluno pode conhecer a academia, participar de uma aula
-          e sentir de perto o ambiente antes de se matricular.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Desde 2011</h3>
-        <p>
-          Mais de uma década de história formando atletas, alunos
-          e pessoas melhores dentro e fora do tatame.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="stats">
-    <div class="stat">
-      <h2>2011</h2>
-      <p>Desde</p>
+    <div class="header">
+        <div>
+            <h1><i class="fa-solid fa-spa"></i> Espaço Taai Botelho</h1>
+            <p>Sistema Integrado de Agendamento e Controle Financeiro</p>
+        </div>
+        <div>
+            <span style="background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; font-size: 12px;">
+                <i class="fa-regular fa-calendar"></i> Gestão do Salão
+            </span>
+        </div>
     </div>
 
-    <div class="stat">
-      <h2>5K+</h2>
-      <p>Seguidores no Instagram</p>
+    <!-- Cards de Resumo Financeiro -->
+    <div class="stats-grid">
+        <div class="stat-card green">
+            <div class="stat-title">Faturamento Total</div>
+            <div class="stat-value" id="totalFaturamento">R$ 0,00</div>
+        </div>
+        <div class="stat-card purple">
+            <div class="stat-title">Total de Atendimentos</div>
+            <div class="stat-value" id="totalAtendimentos">0</div>
+        </div>
+        <div class="stat-card blue">
+            <div class="stat-title">Média por Atendimento</div>
+            <div class="stat-value" id="mediaAtendimento">R$ 0,00</div>
+        </div>
     </div>
 
-    <div class="stat">
-      <h2>Adulto</h2>
-      <p>Turmas disponíveis</p>
+    <!-- Formulário de Cadastro -->
+    <div class="card">
+        <div class="card-title">
+            <i class="fa-solid fa-calendar-plus" style="color: #c88a8a;"></i> Novo Agendamento / Registro
+        </div>
+        <form id="appointmentForm" class="form-grid">
+            <div class="form-group">
+                <label for="data">Data</label>
+                <input type="date" id="data" required>
+            </div>
+            <div class="form-group">
+                <label for="horario">Horário</label>
+                <input type="time" id="horario" required>
+            </div>
+            <div class="form-group">
+                <label for="cliente">Nome da Cliente</label>
+                <input type="text" id="cliente" placeholder="Ex: Ana Silva" required>
+            </div>
+            <div class="form-group">
+                <label for="servico">Serviço / Procedimento</label>
+                <input type="text" id="servico" placeholder="Ex: Mechas, Unha, Cílios" required>
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor (R$)</label>
+                <input type="number" id="valor" step="0.01" placeholder="0.00" required>
+            </div>
+            <div class="form-group">
+                <label for="pagamento">Forma de Pagamento</label>
+                <select id="pagamento" required>
+                    <option value="PIX">PIX</option>
+                    <option value="Cartão">Cartão</option>
+                    <option value="Dinheiro">Dinheiro</option>
+                    <option value="Despesa">Retirada / Despesa</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-full">
+                <i class="fa-solid fa-plus"></i> Adicionar à Agenda
+            </button>
+        </form>
     </div>
 
-    <div class="stat">
-      <h2>Kids</h2>
-      <p>Aulas infantis</p>
+    <!-- Tabela da Agenda -->
+    <div class="card">
+        <div class="card-title">
+            <i class="fa-solid fa-list-check" style="color: #c88a8a;"></i> Registros da Agenda
+        </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Cliente</th>
+                        <th>Serviço</th>
+                        <th>Valor (R$)</th>
+                        <th>Pagamento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="agendaTableBody">
+                    <!-- Registros inseridos via JS -->
+                </tbody>
+            </table>
+        </div>
     </div>
-  </section>
 
-  <section>
-    <h2 class="title">Para quem é o Jiu-Jitsu?</h2>
-    <p class="desc">
-      Para crianças, jovens e adultos que buscam saúde, disciplina,
-      defesa pessoal, competição ou simplesmente uma nova rotina de evolução.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>Para crianças</h3>
-        <p>
-          Ajuda no foco, respeito, autoestima, controle emocional
-          e convivência em grupo.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Para adultos</h3>
-        <p>
-          Excelente para sair do sedentarismo, aliviar o estresse,
-          aprender defesa pessoal e melhorar o condicionamento.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Para competidores</h3>
-        <p>
-          Treinos voltados para evolução técnica, estratégia,
-          intensidade e preparação para campeonatos.
-        </p>
-      </div>
+    <div class="footer">
+        Espaço Taai Botelho &copy; 2026 • Sistema Organizacional e Financeiro
     </div>
-  </section>
 
-  <section>
-    <div class="cta">
-      <h2>Agende sua aula experimental gratuita</h2>
-      <p>
-        Venha conhecer a Wiggers Brothers Jiu-Jitsu e dê o primeiro passo
-        para uma nova fase de evolução.
-      </p>
+    <script>
+        // Dados Iniciais da sua Agenda
+        let agendaData = [
+            { id: 1, data: "2026-01-06", horario: "08:00", cliente: "Ana", servico: "Tudo", valor: 160.00, pagamento: "PIX" },
+            { id: 2, data: "2026-01-06", horario: "09:30", cliente: "Days", servico: "Cabelo", valor: 145.00, pagamento: "Cartão" },
+            { id: 3, data: "2026-01-06", horario: "10:30", cliente: "Paula / Manu", servico: "Atendimento", valor: 110.00, pagamento: "Dinheiro" },
+            { id: 4, data: "2026-01-06", horario: "14:00", cliente: "Liane", servico: "Atendimento", valor: 100.00, pagamento: "PIX" },
+            { id: 5, data: "2026-01-06", horario: "15:00", cliente: "Cliente Mechas", servico: "Mechas", valor: 380.00, pagamento: "PIX" },
+            { id: 6, data: "2026-01-06", horario: "18:00", cliente: "Retirada Pessoal", servico: "Minha Unha", valor: -105.00, pagamento: "Despesa" },
+            { id: 7, data: "2026-01-07", horario: "08:00", cliente: "Cris", servico: "Geral", valor: 250.00, pagamento: "PIX" },
+            { id: 8, data: "2026-01-07", horario: "10:00", cliente: "Dulce", servico: "Pé", valor: 35.00, pagamento: "Dinheiro" },
+            { id: 9, data: "2026-01-07", horario: "10:30", cliente: "Sara", servico: "Atendimento", valor: 60.00, pagamento: "PIX" },
+            { id: 10, data: "2026-01-07", horario: "11:00", cliente: "Cliente Corte", servico: "Corte", valor: 30.00, pagamento: "Dinheiro" },
+            { id: 11, data: "2026-01-07", horario: "13:30", cliente: "Paloma", servico: "Atendimento", valor: 135.00, pagamento: "PIX" },
+            { id: 12, data: "2026-01-07", horario: "16:30", cliente: "Carol", servico: "Mão", valor: 90.00, pagamento: "PIX" },
+            { id: 13, data: "2026-01-07", horario: "17:30", cliente: "Letícia", servico: "Atendimento", valor: 100.00, pagamento: "PIX" },
+            { id: 14, data: "2026-01-07", horario: "19:00", cliente: "Andréia", servico: "Tudo", valor: 70.00, pagamento: "PIX" },
+            { id: 15, data: "2026-01-09", horario: "09:00", cliente: "Tati", servico: "Cílios + Unhas", valor: 195.00, pagamento: "PIX" },
+            { id: 16, data: "2026-01-14", horario: "13:30", cliente: "Tonise", servico: "Tudo", valor: 550.00, pagamento: "PIX" }
+        ];
 
-      <a href="https://wa.me/5551999999999" target="_blank">
-        Chamar no WhatsApp
-      </a>
-    </div>
-  </section>
+        function renderAgenda() {
+            const tbody = document.getElementById('agendaTableBody');
+            tbody.innerHTML = '';
 
-  <section>
-    <h2 class="title">Localização</h2>
-    <p class="desc">
-      Rua das Oliveiras, 175 - Cachoeirinha, Rio Grande do Sul
-    </p>
+            let totalValores = 0;
+            let qtdAtendimentos = 0;
 
-    <iframe
-      src="https://www.google.com/maps?q=Rua%20das%20Oliveiras%20175%20Cachoeirinha%20RS&output=embed"
-      width="100%"
-      height="350"
-      style="border:0; border-radius:20px;"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </section>
+            agendaData.forEach(item => {
+                if (item.valor > 0) {
+                    totalValores += item.valor;
+                    qtdAtendimentos++;
+                }
 
-  <footer>
-    <p>
-      <strong>Wiggers Brothers Jiu-Jitsu</strong><br>
-      Academia de Jiu-Jitsu Brasileiro desde 2011<br>
-      Cachoeirinha - RS
-    </p>
-  </footer>
+                const tr = document.createElement('tr');
+                const [ano, mes, dia] = item.data.split('-');
+                const dataFormatada = `${dia}/${mes}/${ano}`;
 
+                let badgeClass = "badge-pix";
+                if(item.pagamento === "Cartão") badgeClass = "badge-card";
+                if(item.pagamento === "Dinheiro") badgeClass = "badge-cash";
+                if(item.pagamento === "Despesa") badgeClass = "badge-expense";
+
+                tr.innerHTML = `
+                    <td><strong>${dataFormatada}</strong></td>
+                    <td>${item.horario} hs</td>
+                    <td>${item.cliente}</td>
+                    <td>${item.servico}</td>
+                    <td style="font-weight: 600; color: ${item.valor < 0 ? '#e53e3e' : '#2c1a1d'};">
+                        R$ ${item.valor.toFixed(2).replace('.', ',')}
+                    </td>
+                    <td><span class="badge ${badgeClass}">${item.pagamento}</span></td>
+                    <td>
+                        <button class="action-btn" onclick="removerRegistro(${item.id})" title="Excluir">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('totalFaturamento').innerText = `R$ ${totalValores.toFixed(2).replace('.', ',')}`;
+            document.getElementById('totalAtendimentos').innerText = qtdAtendimentos;
+            const media = qtdAtendimentos > 0 ? (totalValores / qtdAtendimentos) : 0;
+            document.getElementById('mediaAtendimento').innerText = `R$ ${media.toFixed(2).replace('.', ',')}`;
+        }
+
+        function removerRegistro(id) {
+            agendaData = agendaData.filter(item => item.id !== id);
+            renderAgenda();
+        }
+
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const data = document.getElementById('data').value;
+            const horario = document.getElementById('horario').value;
+            const cliente = document.getElementById('cliente').value;
+            const servico = document.getElementById('servico').value;
+            let valor = parseFloat(document.getElementById('valor').value);
+            const pagamento = document.getElementById('pagamento').value;
+
+            if (pagamento === "Despesa" && valor > 0) {
+                valor = -valor;
+            }
+
+            const novoItem = { id: Date.now(), data, horario, cliente, servico, valor, pagamento };
+            agendaData.push(novoItem);
+            agendaData.sort((a, b) => new Date(`${a.data}T${a.horario}`) - new Date(`${b.data}T${b.horario}`));
+
+            renderAgenda();
+            this.reset();
+        });
+
+        renderAgenda();
+    </script>
 </body>
 </html>
