@@ -1,391 +1,1769 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espaço Taai Botelho - Sistema de Agendamento</title>
-    <!-- Google Fonts & Ícones -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #faf7f5;
-            color: #4a3e3d;
-            line-height: 1.5;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .header {
-            background: linear-gradient(135deg, #2c1a1d 0%, #4a282e 100%);
-            color: #ffffff;
-            padding: 25px 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(74, 40, 46, 0.15);
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .header h1 {
-            font-size: 26px;
-            font-weight: 600;
-            color: #f7d6d0;
-        }
-        .header p {
-            font-size: 13px;
-            color: #d1b8b3;
-            margin-top: 4px;
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .stat-card {
-            background: #ffffff;
-            padding: 18px 20px;
-            border-radius: 12px;
-            border-left: 5px solid #c88a8a;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-        .stat-card.green { border-left-color: #48bb78; }
-        .stat-card.purple { border-left-color: #9f7aea; }
-        .stat-card.blue { border-left-color: #4299e1; }
-        
-        .stat-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: #8c7b79;
-            font-weight: 600;
-        }
-        .stat-value {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c1a1d;
-            margin-top: 5px;
-        }
-        .card {
-            background: #ffffff;
-            border-radius: 14px;
-            padding: 22px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            margin-bottom: 25px;
-        }
-        .card-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: #2c1a1d;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid #f2e9e4;
-            padding-bottom: 10px;
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-        .form-group label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #635250;
-        }
-        .form-group input, .form-group select {
-            padding: 10px 12px;
-            border: 1px solid #e2d7d5;
-            border-radius: 8px;
-            font-size: 13px;
-            font-family: inherit;
-            outline: none;
-            background-color: #fdfbfb;
-        }
-        .form-group input:focus, .form-group select:focus {
-            border-color: #c88a8a;
-            box-shadow: 0 0 0 3px rgba(200, 138, 138, 0.15);
-            background-color: #ffffff;
-        }
-        .btn {
-            background-color: #c88a8a;
-            color: #ffffff;
-            border: none;
-            padding: 11px 22px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .btn:hover { background-color: #b57777; }
-        .btn-full { grid-column: 1 / -1; margin-top: 5px; }
-        
-        .table-responsive { overflow-x: auto; }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            text-align: left;
-        }
-        th {
-            background-color: #f8f1ef;
-            color: #52403e;
-            padding: 12px 14px;
-            font-weight: 600;
-            border-bottom: 2px solid #ebdcd8;
-            white-space: nowrap;
-        }
-        td {
-            padding: 12px 14px;
-            border-bottom: 1px solid #f2e9e4;
-            color: #4a3e3d;
-            vertical-align: middle;
-        }
-        tr:hover { background-color: #fcf8f7; }
-        .badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        .badge-pix { background-color: #e6fffa; color: #234e52; }
-        .badge-card { background-color: #ebf8ff; color: #2b6cb0; }
-        .badge-cash { background-color: #f0fff4; color: #276749; }
-        .badge-expense { background-color: #fff5f5; color: #9b2c2c; }
-        
-        .action-btn {
-            background: none;
-            border: none;
-            color: #e53e3e;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 4px 8px;
-        }
-        .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #9c8a88;
-            margin-top: 30px;
-            padding-bottom: 15px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Espaço Taai Botelho</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    .app {
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #fff;
+    }
+
+    header {
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+
+    header h1 {
+      font-size: 13px;
+      letter-spacing: 5px;
+      font-weight: 400;
+      color: #777;
+    }
+
+    header h2 {
+      margin-top: 5px;
+      font-size: 29px;
+      color: #b69245;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .welcome {
+      background: linear-gradient(135deg, #fffdf8, #f7efd9);
+      padding: 22px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+      border: 1px solid #eadcb9;
+    }
+
+    .welcome h3 {
+      font-size: 21px;
+      margin-bottom: 6px;
+    }
+
+    .welcome p {
+      color: #777;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .menu button {
+      border: 1px solid #d9c089;
+      background: #fff;
+      border-radius: 16px;
+      padding: 20px 10px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .menu button span {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .menu button:hover {
+      background: #fffaf0;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid #eee;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      color: #b69245;
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: #555;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      margin-bottom: 14px;
+      font-size: 15px;
+      background: white;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #b69245;
+    }
+
+    textarea {
+      resize: none;
+      min-height: 80px;
+    }
+
+    .btn-primary {
+      width: 100%;
+      border: none;
+      background: #b69245;
+      color: white;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      border: 1px solid #d7c08b;
+      background: white;
+      color: #8e6d29;
+      padding: 12px;
+      border-radius: 12px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .appointment {
+      border: 1px solid #eee;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 12px;
+    }
+
+    .appointment-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .appointment strong {
+      font-size: 16px;
+    }
+
+    .time {
+      color: #b69245;
+      font-weight: bold;
+    }
+
+    .appointment p {
+      font-size: 13px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .price {
+      font-size: 17px;
+      color: #b69245 !important;
+      font-weight: bold;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      background: #fff5dc;
+      color: #86630c;
+    }
+
+    .actions {
+      display: flex;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .actions button {
+      flex: 1;
+      border: none;
+      padding: 9px 5px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .confirm {
+      background: #eef7ee;
+      color: #297a2e;
+    }
+
+    .edit {
+      background: #f5f5f5;
+      color: #555;
+    }
+
+    .cancel {
+      background: #fff0f0;
+      color: #b13131;
+    }
+
+    .delete {
+      background: #fff0f0;
+      color: #b13131;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 35px 10px;
+      color: #999;
+    }
+
+    .service-row {
+      border-bottom: 1px solid #eee;
+      padding: 14px 0;
+    }
+
+    .service-row:last-child {
+      border-bottom: none;
+    }
+
+    .service-info {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .service-info small {
+      color: #888;
+    }
+
+    .service-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .service-actions button {
+      flex: 1;
+      border: none;
+      padding: 9px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .manage-box {
+      padding: 16px;
+      border: 1px solid #eee;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .manage-box h4 {
+      color: #b69245;
+      margin-bottom: 5px;
+    }
+
+    .manage-box p {
+      color: #777;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      color: #aaa;
+      font-size: 12px;
+      padding: 25px;
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="header">
-        <div>
-            <h1><i class="fa-solid fa-spa"></i> Espaço Taai Botelho</h1>
-            <p>Sistema Integrado de Agendamento e Controle Financeiro</p>
+<div class="app">
+
+  <header>
+    <h1>ESPAÇO</h1>
+    <h2>Taai Botelho</h2>
+    <p>Beleza • Cuidado • Bem-estar</p>
+  </header>
+
+  <main>
+
+    <div class="welcome">
+      <h3>Olá ✨</h3>
+      <p>Gerencie horários, clientes e serviços de forma simples.</p>
+    </div>
+
+    <div class="menu">
+
+      <button onclick="newAppointment()">
+        <span>📅</span>
+        Novo Agendamento
+      </button>
+
+      <button onclick="showSection('agenda')">
+        <span>📋</span>
+        Agenda
+      </button>
+
+      <button onclick="showSection('servicos')">
+        <span>💇‍♀️</span>
+        Serviços
+      </button>
+
+      <button onclick="showSection('gerenciar')">
+        <span>⚙️</span>
+        Gerenciar
+      </button>
+
+    </div>
+
+    <!-- INÍCIO -->
+
+    <section id="inicio" class="section active">
+
+      <div class="card">
+
+        <h3>Agenda de hoje</h3>
+
+        <div id="todayAppointments"></div>
+
+      </div>
+
+    </section>
+
+    <!-- NOVO / EDITAR AGENDAMENTO -->
+
+    <section id="novo" class="section">
+
+      <div class="card">
+
+        <h3 id="appointmentTitle">Novo Agendamento</h3>
+
+        <input type="hidden" id="editAppointmentId">
+
+        <label>Nome da cliente</label>
+        <input
+          type="text"
+          id="clientName"
+          placeholder="Digite o nome"
+        >
+
+        <label>WhatsApp</label>
+        <input
+          type="tel"
+          id="clientPhone"
+          placeholder="(51) 99999-9999"
+        >
+
+        <label>Serviço</label>
+
+        <select
+          id="service"
+          onchange="showSelectedServicePrice()"
+        ></select>
+
+        <div
+          id="selectedServicePrice"
+          style="
+            margin-top:-5px;
+            margin-bottom:15px;
+            color:#b69245;
+            font-weight:bold;
+          "
+        ></div>
+
+        <label>Data</label>
+        <input type="date" id="date">
+
+        <label>Horário</label>
+        <input type="time" id="time">
+
+        <label>Observação</label>
+
+        <textarea
+          id="notes"
+          placeholder="Opcional"
+        ></textarea>
+
+        <button
+          class="btn-primary"
+          onclick="saveAppointment()"
+        >
+          Salvar Agendamento
+        </button>
+
+        <button
+          class="btn-secondary"
+          onclick="showSection('inicio')"
+        >
+          Voltar
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- AGENDA -->
+
+    <section id="agenda" class="section">
+
+      <div class="card">
+
+        <h3>Agenda</h3>
+
+        <label>Filtrar por data</label>
+
+        <input
+          type="date"
+          id="filterDate"
+          onchange="renderAgenda()"
+        >
+
+        <div id="appointmentsList"></div>
+
+      </div>
+
+    </section>
+
+    <!-- SERVIÇOS VISUALIZAÇÃO -->
+
+    <section id="servicos" class="section">
+
+      <div class="card">
+
+        <h3>Serviços</h3>
+
+        <div id="publicServices"></div>
+
+      </div>
+
+    </section>
+
+    <!-- GERENCIAR -->
+
+    <section id="gerenciar" class="section">
+
+      <div class="card">
+
+        <h3>Gerenciar</h3>
+
+        <div
+          class="manage-box"
+          onclick="showSection('gerenciarServicos')"
+        >
+
+          <h4>💇‍♀️ Serviços e valores</h4>
+
+          <p>
+            Adicionar, editar ou excluir serviços.
+          </p>
+
         </div>
-        <div>
-            <span style="background: rgba(255,255,255,0.15); padding: 6px 14px; border-radius: 20px; font-size: 12px;">
-                <i class="fa-regular fa-calendar"></i> Gestão do Salão
+
+        <div
+          class="manage-box"
+          onclick="showSection('agenda')"
+        >
+
+          <h4>📅 Agendamentos</h4>
+
+          <p>
+            Editar horários, clientes e serviços.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- GERENCIAR SERVIÇOS -->
+
+    <section id="gerenciarServicos" class="section">
+
+      <div class="card">
+
+        <h3>Gerenciar Serviços</h3>
+
+        <button
+          class="btn-primary"
+          onclick="openNewService()"
+        >
+          + Adicionar Serviço
+        </button>
+
+        <div
+          id="manageServices"
+          style="margin-top:20px;"
+        ></div>
+
+        <button
+          class="btn-secondary"
+          onclick="showSection('gerenciar')"
+        >
+          Voltar
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- FORMULÁRIO SERVIÇO -->
+
+    <section id="formServico" class="section">
+
+      <div class="card">
+
+        <h3 id="serviceFormTitle">
+          Novo Serviço
+        </h3>
+
+        <input type="hidden" id="editServiceId">
+
+        <label>Nome do serviço</label>
+
+        <input
+          type="text"
+          id="serviceName"
+          placeholder="Ex: Escova"
+        >
+
+        <label>Valor</label>
+
+        <input
+          type="number"
+          id="servicePrice"
+          placeholder="Ex: 50"
+        >
+
+        <label>Duração em minutos</label>
+
+        <input
+          type="number"
+          id="serviceDuration"
+          placeholder="Ex: 45"
+        >
+
+        <button
+          class="btn-primary"
+          onclick="saveService()"
+        >
+          Salvar Serviço
+        </button>
+
+        <button
+          class="btn-secondary"
+          onclick="showSection('gerenciarServicos')"
+        >
+          Cancelar
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Espaço Taai Botelho
+  </footer>
+
+</div>
+
+<script>
+
+  // =============================
+  // SERVIÇOS
+  // =============================
+
+  const defaultServices = [
+
+    {
+      id: 1,
+      name: "Corte",
+      price: 60,
+      duration: 40
+    },
+
+    {
+      id: 2,
+      name: "Escova",
+      price: 50,
+      duration: 45
+    },
+
+    {
+      id: 3,
+      name: "Coloração",
+      price: 150,
+      duration: 120
+    },
+
+    {
+      id: 4,
+      name: "Manicure",
+      price: 40,
+      duration: 45
+    },
+
+    {
+      id: 5,
+      name: "Pedicure",
+      price: 45,
+      duration: 50
+    },
+
+    {
+      id: 6,
+      name: "Sobrancelha",
+      price: 35,
+      duration: 30
+    }
+
+  ];
+
+  let services =
+    JSON.parse(
+      localStorage.getItem("taaiServices")
+    ) || defaultServices;
+
+
+  // =============================
+  // AGENDAMENTOS
+  // =============================
+
+  let appointments =
+    JSON.parse(
+      localStorage.getItem("taaiAppointments")
+    ) || [];
+
+
+  // =============================
+  // NAVEGAÇÃO
+  // =============================
+
+  function showSection(id) {
+
+    document
+      .querySelectorAll(".section")
+      .forEach(section => {
+
+        section.classList.remove("active");
+
+      });
+
+    document
+      .getElementById(id)
+      .classList.add("active");
+
+
+    if (id === "agenda") {
+      renderAgenda();
+    }
+
+    if (id === "inicio") {
+      renderToday();
+    }
+
+    if (id === "servicos") {
+      renderPublicServices();
+    }
+
+    if (id === "gerenciarServicos") {
+      renderManageServices();
+    }
+
+  }
+
+
+  // =============================
+  // SALVAR DADOS
+  // =============================
+
+  function saveServicesStorage() {
+
+    localStorage.setItem(
+      "taaiServices",
+      JSON.stringify(services)
+    );
+
+  }
+
+
+  function saveAppointmentsStorage() {
+
+    localStorage.setItem(
+      "taaiAppointments",
+      JSON.stringify(appointments)
+    );
+
+  }
+
+
+  // =============================
+  // SELECT DE SERVIÇOS
+  // =============================
+
+  function loadServiceSelect() {
+
+    const select =
+      document.getElementById("service");
+
+    select.innerHTML =
+      '<option value="">Selecione</option>';
+
+    services.forEach(service => {
+
+      select.innerHTML += `
+        <option value="${service.id}">
+          ${service.name}
+        </option>
+      `;
+
+    });
+
+  }
+
+
+  function showSelectedServicePrice() {
+
+    const serviceId =
+      Number(
+        document.getElementById("service").value
+      );
+
+    const service =
+      services.find(
+        item => item.id === serviceId
+      );
+
+    const box =
+      document.getElementById(
+        "selectedServicePrice"
+      );
+
+    if (!service) {
+
+      box.innerHTML = "";
+
+      return;
+
+    }
+
+    box.innerHTML =
+      `${formatMoney(service.price)} • ${service.duration} min`;
+
+  }
+
+
+  // =============================
+  // NOVO AGENDAMENTO
+  // =============================
+
+  function newAppointment() {
+
+    clearAppointmentForm();
+
+    document.getElementById(
+      "appointmentTitle"
+    ).innerText = "Novo Agendamento";
+
+    loadServiceSelect();
+
+    showSection("novo");
+
+  }
+
+
+  // =============================
+  // SALVAR / EDITAR AGENDAMENTO
+  // =============================
+
+  function saveAppointment() {
+
+    const id =
+      document.getElementById(
+        "editAppointmentId"
+      ).value;
+
+    const name =
+      document.getElementById(
+        "clientName"
+      ).value.trim();
+
+    const phone =
+      document.getElementById(
+        "clientPhone"
+      ).value.trim();
+
+    const serviceId =
+      Number(
+        document.getElementById(
+          "service"
+        ).value
+      );
+
+    const date =
+      document.getElementById(
+        "date"
+      ).value;
+
+    const time =
+      document.getElementById(
+        "time"
+      ).value;
+
+    const notes =
+      document.getElementById(
+        "notes"
+      ).value.trim();
+
+
+    if (
+      !name ||
+      !phone ||
+      !serviceId ||
+      !date ||
+      !time
+    ) {
+
+      alert(
+        "Preencha todos os campos obrigatórios."
+      );
+
+      return;
+
+    }
+
+
+    const service =
+      services.find(
+        item => item.id === serviceId
+      );
+
+
+    const conflict =
+      appointments.some(item =>
+
+        item.date === date &&
+
+        item.time === time &&
+
+        item.status !== "Cancelado" &&
+
+        String(item.id) !== String(id)
+
+      );
+
+
+    if (conflict) {
+
+      alert(
+        "Esse horário já está ocupado."
+      );
+
+      return;
+
+    }
+
+
+    if (id) {
+
+      const appointment =
+        appointments.find(
+          item =>
+            String(item.id) === String(id)
+        );
+
+      if (!appointment) return;
+
+      appointment.name = name;
+      appointment.phone = phone;
+      appointment.serviceId = serviceId;
+      appointment.serviceName = service.name;
+      appointment.price = service.price;
+      appointment.date = date;
+      appointment.time = time;
+      appointment.notes = notes;
+
+      alert(
+        "Agendamento atualizado!"
+      );
+
+    }
+
+    else {
+
+      appointments.push({
+
+        id: Date.now(),
+
+        name,
+
+        phone,
+
+        serviceId,
+
+        serviceName: service.name,
+
+        price: service.price,
+
+        date,
+
+        time,
+
+        notes,
+
+        status: "Agendado"
+
+      });
+
+      alert(
+        "Agendamento realizado!"
+      );
+
+    }
+
+
+    saveAppointmentsStorage();
+
+    clearAppointmentForm();
+
+    showSection("agenda");
+
+  }
+
+
+  // =============================
+  // EDITAR AGENDAMENTO
+  // =============================
+
+  function editAppointment(id) {
+
+    const appointment =
+      appointments.find(
+        item => item.id === id
+      );
+
+    if (!appointment) return;
+
+
+    loadServiceSelect();
+
+
+    document.getElementById(
+      "editAppointmentId"
+    ).value =
+      appointment.id;
+
+
+    document.getElementById(
+      "clientName"
+    ).value =
+      appointment.name;
+
+
+    document.getElementById(
+      "clientPhone"
+    ).value =
+      appointment.phone;
+
+
+    document.getElementById(
+      "service"
+    ).value =
+      appointment.serviceId;
+
+
+    document.getElementById(
+      "date"
+    ).value =
+      appointment.date;
+
+
+    document.getElementById(
+      "time"
+    ).value =
+      appointment.time;
+
+
+    document.getElementById(
+      "notes"
+    ).value =
+      appointment.notes || "";
+
+
+    document.getElementById(
+      "appointmentTitle"
+    ).innerText =
+      "Editar Agendamento";
+
+
+    showSelectedServicePrice();
+
+    showSection("novo");
+
+  }
+
+
+  function clearAppointmentForm() {
+
+    document.getElementById(
+      "editAppointmentId"
+    ).value = "";
+
+    document.getElementById(
+      "clientName"
+    ).value = "";
+
+    document.getElementById(
+      "clientPhone"
+    ).value = "";
+
+    document.getElementById(
+      "date"
+    ).value = "";
+
+    document.getElementById(
+      "time"
+    ).value = "";
+
+    document.getElementById(
+      "notes"
+    ).value = "";
+
+    document.getElementById(
+      "selectedServicePrice"
+    ).innerHTML = "";
+
+  }
+
+
+  // =============================
+  // AGENDA
+  // =============================
+
+  function renderAgenda() {
+
+    const container =
+      document.getElementById(
+        "appointmentsList"
+      );
+
+    const filter =
+      document.getElementById(
+        "filterDate"
+      ).value;
+
+
+    let list =
+      [...appointments];
+
+
+    if (filter) {
+
+      list =
+        list.filter(
+          item =>
+            item.date === filter
+        );
+
+    }
+
+
+    list.sort(
+      (a, b) =>
+
+        (a.date + a.time)
+          .localeCompare(
+            b.date + b.time
+          )
+    );
+
+
+    if (!list.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Nenhum agendamento encontrado.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      list.map(item => `
+
+        <div class="appointment">
+
+          <div class="appointment-top">
+
+            <strong>
+              ${item.name}
+            </strong>
+
+            <span class="time">
+              ${item.time}
             </span>
-        </div>
-    </div>
 
-    <!-- Cards de Resumo Financeiro -->
-    <div class="stats-grid">
-        <div class="stat-card green">
-            <div class="stat-title">Faturamento Total</div>
-            <div class="stat-value" id="totalFaturamento">R$ 0,00</div>
-        </div>
-        <div class="stat-card purple">
-            <div class="stat-title">Total de Atendimentos</div>
-            <div class="stat-value" id="totalAtendimentos">0</div>
-        </div>
-        <div class="stat-card blue">
-            <div class="stat-title">Média por Atendimento</div>
-            <div class="stat-value" id="mediaAtendimento">R$ 0,00</div>
-        </div>
-    </div>
+          </div>
 
-    <!-- Formulário de Cadastro -->
-    <div class="card">
-        <div class="card-title">
-            <i class="fa-solid fa-calendar-plus" style="color: #c88a8a;"></i> Novo Agendamento / Registro
-        </div>
-        <form id="appointmentForm" class="form-grid">
-            <div class="form-group">
-                <label for="data">Data</label>
-                <input type="date" id="data" required>
-            </div>
-            <div class="form-group">
-                <label for="horario">Horário</label>
-                <input type="time" id="horario" required>
-            </div>
-            <div class="form-group">
-                <label for="cliente">Nome da Cliente</label>
-                <input type="text" id="cliente" placeholder="Ex: Ana Silva" required>
-            </div>
-            <div class="form-group">
-                <label for="servico">Serviço / Procedimento</label>
-                <input type="text" id="servico" placeholder="Ex: Mechas, Unha, Cílios" required>
-            </div>
-            <div class="form-group">
-                <label for="valor">Valor (R$)</label>
-                <input type="number" id="valor" step="0.01" placeholder="0.00" required>
-            </div>
-            <div class="form-group">
-                <label for="pagamento">Forma de Pagamento</label>
-                <select id="pagamento" required>
-                    <option value="PIX">PIX</option>
-                    <option value="Cartão">Cartão</option>
-                    <option value="Dinheiro">Dinheiro</option>
-                    <option value="Despesa">Retirada / Despesa</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-full">
-                <i class="fa-solid fa-plus"></i> Adicionar à Agenda
+          <p>
+            💇‍♀️ ${item.serviceName}
+          </p>
+
+          <p class="price">
+            ${formatMoney(item.price)}
+          </p>
+
+          <p>
+            📅 ${formatDate(item.date)}
+          </p>
+
+          <p>
+            📱 ${item.phone}
+          </p>
+
+          ${
+            item.notes
+              ? `<p>📝 ${item.notes}</p>`
+              : ""
+          }
+
+          <span class="status">
+            ${item.status}
+          </span>
+
+          <div class="actions">
+
+            <button
+              class="confirm"
+              onclick="confirmAppointment(${item.id})"
+            >
+              Confirmar
             </button>
-        </form>
-    </div>
 
-    <!-- Tabela da Agenda -->
-    <div class="card">
-        <div class="card-title">
-            <i class="fa-solid fa-list-check" style="color: #c88a8a;"></i> Registros da Agenda
+            <button
+              class="edit"
+              onclick="editAppointment(${item.id})"
+            >
+              Editar
+            </button>
+
+            <button
+              class="cancel"
+              onclick="cancelAppointment(${item.id})"
+            >
+              Cancelar
+            </button>
+
+          </div>
+
         </div>
-        <div class="table-responsive">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Horário</th>
-                        <th>Cliente</th>
-                        <th>Serviço</th>
-                        <th>Valor (R$)</th>
-                        <th>Pagamento</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="agendaTableBody">
-                    <!-- Registros inseridos via JS -->
-                </tbody>
-            </table>
+
+      `).join("");
+
+  }
+
+
+  function renderToday() {
+
+    const container =
+      document.getElementById(
+        "todayAppointments"
+      );
+
+    const today =
+      getTodayString();
+
+
+    const list =
+      appointments
+
+        .filter(
+          item =>
+
+            item.date === today &&
+
+            item.status !== "Cancelado"
+        )
+
+        .sort(
+          (a, b) =>
+            a.time.localeCompare(
+              b.time
+            )
+        );
+
+
+    if (!list.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Nenhum horário marcado para hoje.
         </div>
-    </div>
+      `;
 
-    <div class="footer">
-        Espaço Taai Botelho &copy; 2026 • Sistema Organizacional e Financeiro
-    </div>
+      return;
 
-    <script>
-        // Dados Iniciais da sua Agenda
-        let agendaData = [
-            { id: 1, data: "2026-01-06", horario: "08:00", cliente: "Ana", servico: "Tudo", valor: 160.00, pagamento: "PIX" },
-            { id: 2, data: "2026-01-06", horario: "09:30", cliente: "Days", servico: "Cabelo", valor: 145.00, pagamento: "Cartão" },
-            { id: 3, data: "2026-01-06", horario: "10:30", cliente: "Paula / Manu", servico: "Atendimento", valor: 110.00, pagamento: "Dinheiro" },
-            { id: 4, data: "2026-01-06", horario: "14:00", cliente: "Liane", servico: "Atendimento", valor: 100.00, pagamento: "PIX" },
-            { id: 5, data: "2026-01-06", horario: "15:00", cliente: "Cliente Mechas", servico: "Mechas", valor: 380.00, pagamento: "PIX" },
-            { id: 6, data: "2026-01-06", horario: "18:00", cliente: "Retirada Pessoal", servico: "Minha Unha", valor: -105.00, pagamento: "Despesa" },
-            { id: 7, data: "2026-01-07", horario: "08:00", cliente: "Cris", servico: "Geral", valor: 250.00, pagamento: "PIX" },
-            { id: 8, data: "2026-01-07", horario: "10:00", cliente: "Dulce", servico: "Pé", valor: 35.00, pagamento: "Dinheiro" },
-            { id: 9, data: "2026-01-07", horario: "10:30", cliente: "Sara", servico: "Atendimento", valor: 60.00, pagamento: "PIX" },
-            { id: 10, data: "2026-01-07", horario: "11:00", cliente: "Cliente Corte", servico: "Corte", valor: 30.00, pagamento: "Dinheiro" },
-            { id: 11, data: "2026-01-07", horario: "13:30", cliente: "Paloma", servico: "Atendimento", valor: 135.00, pagamento: "PIX" },
-            { id: 12, data: "2026-01-07", horario: "16:30", cliente: "Carol", servico: "Mão", valor: 90.00, pagamento: "PIX" },
-            { id: 13, data: "2026-01-07", horario: "17:30", cliente: "Letícia", servico: "Atendimento", valor: 100.00, pagamento: "PIX" },
-            { id: 14, data: "2026-01-07", horario: "19:00", cliente: "Andréia", servico: "Tudo", valor: 70.00, pagamento: "PIX" },
-            { id: 15, data: "2026-01-09", horario: "09:00", cliente: "Tati", servico: "Cílios + Unhas", valor: 195.00, pagamento: "PIX" },
-            { id: 16, data: "2026-01-14", horario: "13:30", cliente: "Tonise", servico: "Tudo", valor: 550.00, pagamento: "PIX" }
-        ];
+    }
 
-        function renderAgenda() {
-            const tbody = document.getElementById('agendaTableBody');
-            tbody.innerHTML = '';
 
-            let totalValores = 0;
-            let qtdAtendimentos = 0;
+    container.innerHTML =
+      list.map(item => `
 
-            agendaData.forEach(item => {
-                if (item.valor > 0) {
-                    totalValores += item.valor;
-                    qtdAtendimentos++;
-                }
+        <div class="appointment">
 
-                const tr = document.createElement('tr');
-                const [ano, mes, dia] = item.data.split('-');
-                const dataFormatada = `${dia}/${mes}/${ano}`;
+          <div class="appointment-top">
 
-                let badgeClass = "badge-pix";
-                if(item.pagamento === "Cartão") badgeClass = "badge-card";
-                if(item.pagamento === "Dinheiro") badgeClass = "badge-cash";
-                if(item.pagamento === "Despesa") badgeClass = "badge-expense";
+            <strong>
+              ${item.name}
+            </strong>
 
-                tr.innerHTML = `
-                    <td><strong>${dataFormatada}</strong></td>
-                    <td>${item.horario} hs</td>
-                    <td>${item.cliente}</td>
-                    <td>${item.servico}</td>
-                    <td style="font-weight: 600; color: ${item.valor < 0 ? '#e53e3e' : '#2c1a1d'};">
-                        R$ ${item.valor.toFixed(2).replace('.', ',')}
-                    </td>
-                    <td><span class="badge ${badgeClass}">${item.pagamento}</span></td>
-                    <td>
-                        <button class="action-btn" onclick="removerRegistro(${item.id})" title="Excluir">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
+            <span class="time">
+              ${item.time}
+            </span>
 
-            document.getElementById('totalFaturamento').innerText = `R$ ${totalValores.toFixed(2).replace('.', ',')}`;
-            document.getElementById('totalAtendimentos').innerText = qtdAtendimentos;
-            const media = qtdAtendimentos > 0 ? (totalValores / qtdAtendimentos) : 0;
-            document.getElementById('mediaAtendimento').innerText = `R$ ${media.toFixed(2).replace('.', ',')}`;
+          </div>
+
+          <p>
+            ${item.serviceName}
+          </p>
+
+          <p class="price">
+            ${formatMoney(item.price)}
+          </p>
+
+          <span class="status">
+            ${item.status}
+          </span>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  function confirmAppointment(id) {
+
+    const item =
+      appointments.find(
+        appointment =>
+          appointment.id === id
+      );
+
+    if (!item) return;
+
+    item.status =
+      "Confirmado";
+
+    saveAppointmentsStorage();
+
+    renderAgenda();
+
+    renderToday();
+
+  }
+
+
+  function cancelAppointment(id) {
+
+    const item =
+      appointments.find(
+        appointment =>
+          appointment.id === id
+      );
+
+    if (!item) return;
+
+
+    if (
+      !confirm(
+        "Deseja cancelar este agendamento?"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    item.status =
+      "Cancelado";
+
+    saveAppointmentsStorage();
+
+    renderAgenda();
+
+    renderToday();
+
+  }
+
+
+  // =============================
+  // SERVIÇOS
+  // =============================
+
+  function renderPublicServices() {
+
+    const container =
+      document.getElementById(
+        "publicServices"
+      );
+
+
+    if (!services.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Nenhum serviço cadastrado.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      services.map(service => `
+
+        <div class="service-row">
+
+          <div class="service-info">
+
+            <div>
+
+              <strong>
+                ${service.name}
+              </strong>
+
+              <br>
+
+              <small>
+                ${service.duration} minutos
+              </small>
+
+            </div>
+
+            <strong>
+              ${formatMoney(service.price)}
+            </strong>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  // =============================
+  // GERENCIAR SERVIÇOS
+  // =============================
+
+  function renderManageServices() {
+
+    const container =
+      document.getElementById(
+        "manageServices"
+      );
+
+
+    if (!services.length) {
+
+      container.innerHTML = `
+        <div class="empty">
+          Nenhum serviço cadastrado.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    container.innerHTML =
+      services.map(service => `
+
+        <div class="service-row">
+
+          <div class="service-info">
+
+            <div>
+
+              <strong>
+                ${service.name}
+              </strong>
+
+              <br>
+
+              <small>
+                ${service.duration} minutos
+              </small>
+
+            </div>
+
+            <strong>
+              ${formatMoney(service.price)}
+            </strong>
+
+          </div>
+
+          <div class="service-actions">
+
+            <button
+              class="edit"
+              onclick="editService(${service.id})"
+            >
+              Editar
+            </button>
+
+            <button
+              class="delete"
+              onclick="deleteService(${service.id})"
+            >
+              Excluir
+            </button>
+
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  function openNewService() {
+
+    document.getElementById(
+      "editServiceId"
+    ).value = "";
+
+    document.getElementById(
+      "serviceName"
+    ).value = "";
+
+    document.getElementById(
+      "servicePrice"
+    ).value = "";
+
+    document.getElementById(
+      "serviceDuration"
+    ).value = "";
+
+    document.getElementById(
+      "serviceFormTitle"
+    ).innerText =
+      "Novo Serviço";
+
+    showSection("formServico");
+
+  }
+
+
+  function editService(id) {
+
+    const service =
+      services.find(
+        item => item.id === id
+      );
+
+    if (!service) return;
+
+
+    document.getElementById(
+      "editServiceId"
+    ).value =
+      service.id;
+
+
+    document.getElementById(
+      "serviceName"
+    ).value =
+      service.name;
+
+
+    document.getElementById(
+      "servicePrice"
+    ).value =
+      service.price;
+
+
+    document.getElementById(
+      "serviceDuration"
+    ).value =
+      service.duration;
+
+
+    document.getElementById(
+      "serviceFormTitle"
+    ).innerText =
+      "Editar Serviço";
+
+
+    showSection("formServico");
+
+  }
+
+
+  function saveService() {
+
+    const id =
+      document.getElementById(
+        "editServiceId"
+      ).value;
+
+    const name =
+      document.getElementById(
+        "serviceName"
+      ).value.trim();
+
+    const price =
+      Number(
+        document.getElementById(
+          "servicePrice"
+        ).value
+      );
+
+    const duration =
+      Number(
+        document.getElementById(
+          "serviceDuration"
+        ).value
+      );
+
+
+    if (
+      !name ||
+      !price ||
+      !duration
+    ) {
+
+      alert(
+        "Preencha todos os campos."
+      );
+
+      return;
+
+    }
+
+
+    if (id) {
+
+      const service =
+        services.find(
+          item =>
+            String(item.id) ===
+            String(id)
+        );
+
+      if (!service) return;
+
+      service.name = name;
+      service.price = price;
+      service.duration = duration;
+
+      alert(
+        "Serviço atualizado!"
+      );
+
+    }
+
+    else {
+
+      services.push({
+
+        id: Date.now(),
+
+        name,
+
+        price,
+
+        duration
+
+      });
+
+      alert(
+        "Serviço adicionado!"
+      );
+
+    }
+
+
+    saveServicesStorage();
+
+    loadServiceSelect();
+
+    renderPublicServices();
+
+    renderManageServices();
+
+    showSection(
+      "gerenciarServicos"
+    );
+
+  }
+
+
+  function deleteService(id) {
+
+    const service =
+      services.find(
+        item => item.id === id
+      );
+
+    if (!service) return;
+
+
+    if (
+      !confirm(
+        `Excluir o serviço "${service.name}"?`
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    services =
+      services.filter(
+        item =>
+          item.id !== id
+      );
+
+
+    saveServicesStorage();
+
+    loadServiceSelect();
+
+    renderManageServices();
+
+    renderPublicServices();
+
+  }
+
+
+  // =============================
+  // UTILIDADES
+  // =============================
+
+  function formatMoney(value) {
+
+    return Number(value)
+      .toLocaleString(
+        "pt-BR",
+        {
+          style: "currency",
+          currency: "BRL"
         }
+      );
 
-        function removerRegistro(id) {
-            agendaData = agendaData.filter(item => item.id !== id);
-            renderAgenda();
-        }
+  }
 
-        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const data = document.getElementById('data').value;
-            const horario = document.getElementById('horario').value;
-            const cliente = document.getElementById('cliente').value;
-            const servico = document.getElementById('servico').value;
-            let valor = parseFloat(document.getElementById('valor').value);
-            const pagamento = document.getElementById('pagamento').value;
 
-            if (pagamento === "Despesa" && valor > 0) {
-                valor = -valor;
-            }
+  function formatDate(date) {
 
-            const novoItem = { id: Date.now(), data, horario, cliente, servico, valor, pagamento };
-            agendaData.push(novoItem);
-            agendaData.sort((a, b) => new Date(`${a.data}T${a.horario}`) - new Date(`${b.data}T${b.horario}`));
+    if (!date) return "";
 
-            renderAgenda();
-            this.reset();
-        });
+    const parts =
+      date.split("-");
 
-        renderAgenda();
-    </script>
+    return `
+      ${parts[2]}/${parts[1]}/${parts[0]}
+    `;
+
+  }
+
+
+  function getTodayString() {
+
+    const today =
+      new Date();
+
+    const year =
+      today.getFullYear();
+
+    const month =
+      String(
+        today.getMonth() + 1
+      ).padStart(2, "0");
+
+    const day =
+      String(
+        today.getDate()
+      ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+  }
+
+
+  // =============================
+  // INICIALIZAÇÃO
+  // =============================
+
+  loadServiceSelect();
+
+  renderToday();
+
+  renderPublicServices();
+
+</script>
+
 </body>
 </html>
